@@ -52,16 +52,16 @@ class ProductResource extends Resource
                                 $set('slug', Str::slug($state));
                             }),
                         
-                            TextInput::make('slug')
-                                ->required()
-                                ->maxLength(255)
-                                ->disabled()
-                                ->dehydrated()
-                                ->unique(Product::class, 'slug', ignoreRecord: true),
+                        TextInput::make('slug')
+                            ->required()
+                            ->maxLength(255)
+                            ->disabled()
+                            ->dehydrated()
+                            ->unique(Product::class, 'slug', ignoreRecord: true),
                             
-                            MarkdownEditor::make('description')
-                                ->columnSpanFull()
-                                ->fileAttachmentsDirectory('products')
+                        MarkdownEditor::make('description')
+                            ->columnSpanFull()
+                            ->fileAttachmentsDirectory('products')
                     ])->columns(2),
 
                     Section::make('Images')->schema([
