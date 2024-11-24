@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'brand_id', 'name', 'slug', 'images', 'description', 'original_price', 'final_price', 'discount_percentage', 'stock_amount', 'is_active', 'is_featured', 'in_stock', 'on_sale', 'rating'];
+    protected $fillable = ['category_id', 'brand_id', 'name', 'slug', 'images', 'description', 'original_price', 'final_price', 'discount_percentage', 'stock_amount', 'sold_amount', 'is_active', 'is_featured', 'in_stock', 'on_sale', 'rating'];
 
     protected $casts = ['images' => 'array'];
 
@@ -31,5 +31,9 @@ class Product extends Model
 
     public function wishlists() {
         return $this->belongsToMany(Wishlist::class, 'wishlist_product')->withPivot('priority', 'added_at', 'note')->withTimestamps();
+    }
+
+    public function comments() {
+        return $this->hasMany(ProductComment::class, 'product_id');
     }
 }
