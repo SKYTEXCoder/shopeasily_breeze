@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Filament\Resources\OrderResource\RelationManagers\AddressRelationManager;
 use App\Models\Order;
 use App\Models\Product;
 use Filament\Forms;
@@ -54,7 +55,7 @@ class OrderResource extends Resource
                         Select::make('payment_method')
                             ->options([
                                 'stripe' => 'Stripe',
-                                'COD' => 'Cash on Delivery'
+                                'COD' => 'Cash on Delivery (COD)'
                             ])
                             ->required(),
 
@@ -213,7 +214,9 @@ class OrderResource extends Resource
                     ->numeric()
                     ->label('Grand Total')
                     ->sortable()
-                    ->money('IDR'),
+                    ->money('IDR', 0, 'id')
+                    //->prefix('Rp')
+                    ,
 
                 TextColumn::make('payment_method')
                     ->searchable()
@@ -272,7 +275,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AddressRelationManager::class
         ];
     }
 
