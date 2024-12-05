@@ -17,7 +17,7 @@ class OrderStatistics extends BaseWidget
             Stat::make('Order(s) Shipped', Order::query()->where('status', 'shipped')->count()),
             Stat::make('Order(s) Delivered', Order::query()->where('status', 'delivered')->count()),
             Stat::make('Order(s) Cancelled', Order::query()->where('status', 'cancelled')->count()),
-            Stat::make('Average Price', Number::currency(Order::query()->avg('grand_total'), 'IDR', 'id'))            
+            Stat::make('Average Price', Number::currency(Order::query()->avg('grand_total') ?? 0, 'IDR', 'id'))
         ];
     }
 }
