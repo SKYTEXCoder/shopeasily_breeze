@@ -39,6 +39,10 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
+    protected static ?string $recordTitleAttribute = 'id';
+
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -84,14 +88,14 @@ class OrderResource extends Resource
                                 'processing' => 'warning',
                                 'shipped' => 'success',
                                 'delivered' => 'success',
-                                'cancelled' => 'danger',                 
+                                'cancelled' => 'danger',
                             ])
                             ->icons([
                                 'new' => 'heroicon-m-sparkles',
                                 'processing' => 'heroicon-m-arrow-path',
                                 'shipped' => 'heroicon-m-truck',
                                 'delivered' => 'heroicon-m-check-badge',
-                                'cancelled' => 'heroicon-m-x-circle',                                 
+                                'cancelled' => 'heroicon-m-x-circle',
                             ]),
 
                             Select::make('currency')
@@ -205,8 +209,15 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
+
+                TextColumn::make('id')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Order ID')
+                    ->toggleable(isToggledHiddenByDefault: false),
+
                 TextColumn::make('user.name')
-                    ->label('Customer')
+                    ->label('Customer Name')
                     ->sortable()
                     ->searchable(),
 
@@ -220,11 +231,13 @@ class OrderResource extends Resource
 
                 TextColumn::make('payment_method')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Payment Method'),
 
                 TextColumn::make('payment_status')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Payment Status'),
 
                 TextColumn::make('currency')
                     ->sortable()
@@ -232,7 +245,8 @@ class OrderResource extends Resource
 
                 TextColumn::make('shipping_method')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->label('Shipping Method'),
 
                 SelectColumn::make('status')
                     ->options([
@@ -243,17 +257,18 @@ class OrderResource extends Resource
                         'cancelled' => 'Cancelled',
                     ])
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Order Status'),
 
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
 
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->toggleable(isToggledHiddenByDefault: false)
             ])
             ->filters([
                 //
@@ -295,5 +310,9 @@ class OrderResource extends Resource
             'view' => Pages\ViewOrder::route('/{record}'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array {
+        return ['id', 'user_id', 'grand_total', 'notes'];
     }
 }

@@ -35,6 +35,10 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -51,14 +55,14 @@ class ProductResource extends Resource
                                 }
                                 $set('slug', Str::slug($state));
                             }),
-                        
+
                         TextInput::make('slug')
                             ->required()
                             ->maxLength(255)
                             ->disabled()
                             ->dehydrated()
                             ->unique(Product::class, 'slug', ignoreRecord: true),
-                            
+
                         MarkdownEditor::make('description')
                             ->columnSpanFull()
                             ->fileAttachmentsDirectory('products')
@@ -132,16 +136,16 @@ class ProductResource extends Resource
 
                 IconColumn::make('is_featured')
                     ->boolean(),
-                
+
                 IconColumn::make('on_sale')
                     ->boolean(),
-            
+
                 IconColumn::make('in_stock')
                     ->boolean(),
 
                 IconColumn::make('is_active')
                     ->boolean(),
-                    
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -187,5 +191,9 @@ class ProductResource extends Resource
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array {
+        return ['id', 'name', 'slug', 'description'];
     }
 }

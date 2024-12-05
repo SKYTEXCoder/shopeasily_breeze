@@ -25,6 +25,10 @@ class BrandResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-computer-desktop';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -105,5 +109,9 @@ class BrandResource extends Resource
             'create' => Pages\CreateBrand::route('/create'),
             'edit' => Pages\EditBrand::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array {
+        return ['id', 'name', 'slug'];
     }
 }

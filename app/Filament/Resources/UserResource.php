@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\OrdersRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -22,6 +23,10 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -69,7 +74,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrdersRelationManager::class
         ];
     }
 
@@ -80,5 +85,9 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array {
+        return ['id', 'name', 'email'];
     }
 }

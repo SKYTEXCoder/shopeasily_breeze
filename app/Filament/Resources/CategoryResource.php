@@ -29,6 +29,10 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -56,7 +60,7 @@ class CategoryResource extends Resource
                         Toggle::make('is_active')
                             ->required()
                             ->default(true),
-                        
+
                 ])
             ]);
     }
@@ -112,5 +116,9 @@ class CategoryResource extends Resource
             'create' => Pages\CreateCategory::route('/create'),
             'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array {
+        return ['id', 'name', 'slug'];
     }
 }
