@@ -34,7 +34,7 @@ class ProductComment extends Model
     public function parentRecursiveFlatten() {
         $result = collect();
         $item = $this->parentRecursive;
-        if ($item instanceof User) {
+        if ($item instanceof ProductComment) {
             $result->push($item);
             $result = $result->merge($item->parentRecursiveFlatten());
         }

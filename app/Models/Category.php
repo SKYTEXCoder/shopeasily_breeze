@@ -29,7 +29,7 @@ class Category extends Model
     public function parent_category_recursive_flatten() {
         $result = collect();
         $item = $this->parent_category_recursive;
-        if ($item instanceof User) {
+        if ($item instanceof Category) {
             $result->push($item);
             $result = $result->merge($item->parent_category_recursive_flatten());
         }
