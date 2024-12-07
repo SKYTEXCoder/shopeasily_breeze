@@ -19,6 +19,11 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
+        'image',
+        'is_admin',
+        'phone_number',
         'email',
         'email_verified_at',
         'password',
@@ -61,5 +66,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function comments() {
         return $this->hasMany(ProductComment::class, 'user_id');
+    }
+
+    public function getFullNameAttribute() {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function setNameAttribute($value)
+    {
+        $parts = explode(' ', $value, 2);
+        $this->first_name = $parts[0] ?? null;
+        $this->last_name = $parts[1] ?? null;
     }
 }

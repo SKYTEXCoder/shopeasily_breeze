@@ -58,9 +58,9 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->brandLogo(fn () => view('filament.admin.logo'))
+            // ->brandLogo(fn () => view('filament.admin.logo'))
             // ->brandLogoHeight('2rem')
-            ->favicon(asset('favicons/favicon.ico'))
+            // ->favicon(asset('favicons/favicon.ico'))
             ;
     }
 }
