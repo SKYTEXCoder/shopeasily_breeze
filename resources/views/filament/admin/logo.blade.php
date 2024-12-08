@@ -5,7 +5,7 @@
         <img src="{{ asset('branding/shopeasily-logo-big.png') }}" alt="ShopEasily™ Logo" class="h-11">
 
         <!-- Blank Spacer PNG to add spacing (adding margin styles doesn't work for some reason) -->
-        <img src="{{ asset('branding/blank-spacer.png') }}" alt="" class="h-1">
+        <img src="{{ asset('branding/blank-spacer.png') }}" alt="" class="h-3">
 
         <!-- Name -->
         <img src="{{ asset('branding/shopeasily-name-big.png') }}" alt="ShopEasily™ Name" class="h-5">

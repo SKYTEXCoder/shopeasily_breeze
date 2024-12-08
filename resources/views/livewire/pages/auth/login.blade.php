@@ -20,7 +20,9 @@ new #[Layout('layouts.guest')] class extends Component
 
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $intendedUrl = session()->get('url.intended');
+        dd($intendedUrl); // This will show you the intended route, if set
+        $this->redirectIntended(default: route('index', absolute: false), navigate: true);
     }
 }; ?>
 

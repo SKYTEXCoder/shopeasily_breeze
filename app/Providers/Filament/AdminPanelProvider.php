@@ -20,6 +20,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Redirect;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -58,9 +59,10 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            // ->brandLogo(fn () => view('filament.admin.logo'))
+            ->spa()
+            ->brandLogo(fn () => view('filament.admin.logo'))
             // ->brandLogoHeight('2rem')
-            // ->favicon(asset('favicons/favicon.ico'))
+            ->favicon(asset('favicons/favicon.ico'))
             ;
     }
 }

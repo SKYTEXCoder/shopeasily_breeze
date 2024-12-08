@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -49,8 +51,22 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
+
+    /* protected static function booted()
+    {
+        // Before creating a new user
+        static::creating(function ($user) {
+            $user->name = $user->first_name . ' ' . $user->last_name;
+        });
+
+        // Before updating an existing user
+        static::updating(function ($user) {
+            $user->name = $user->first_name . ' ' . $user->last_name;
+        });
+    } */
 
     public function orders() {
         return $this->hasMany(Order::class);
@@ -77,5 +93,10 @@ class User extends Authenticatable implements MustVerifyEmail
         $parts = explode(' ', $value, 2);
         $this->first_name = $parts[0] ?? null;
         $this->last_name = $parts[1] ?? null;
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->is_admin && $this->hasVerifiedEmail();
     }
 }
