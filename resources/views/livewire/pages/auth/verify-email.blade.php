@@ -14,7 +14,15 @@ new #[Layout('layouts.guest')] class extends Component
     public function sendVerification(): void
     {
         if (Auth::user()->hasVerifiedEmail()) {
-            $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+            $intendedUrl = session()->get('url.intended');
+
+            if ($intendedUrl && str_contains($intendedUrl, 'admin')) {
+                $this->redirectRoute('index');
+            }
+
+            else {
+                $this->redirectIntended(default: route('index', absolute: false), navigate: true);
+            }
 
             return;
         }
@@ -42,7 +50,7 @@ new #[Layout('layouts.guest')] class extends Component
 
     @if (session('status') == 'verification-link-sent')
         <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
+            {{ __('A new verification link has been sent to the email address that you provided during registration.') }}
         </div>
     @endif
 

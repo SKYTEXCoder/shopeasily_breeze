@@ -29,7 +29,15 @@ new #[Layout('layouts.guest')] class extends Component
 
         session(['auth.password_confirmed_at' => time()]);
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        $intendedUrl = session()->get('url.intended');
+
+        if ($intendedUrl && str_contains($intendedUrl, 'admin')) {
+            $this->redirectRoute('index');
+        }
+
+        else {
+            $this->redirectIntended(default: route('index', absolute: false), navigate: true);
+        }
     }
 }; ?>
 

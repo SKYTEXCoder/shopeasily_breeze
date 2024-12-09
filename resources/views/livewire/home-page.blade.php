@@ -145,7 +145,7 @@
     <!-- Carousel Slider Section START -->
     <div x-data="{
         // Sets the time between each slides in milliseconds
-        autoplayIntervalTime: 4000,
+        autoplayIntervalTime: 5000,
         slides: [
             {
                 imgSrc: 'https://penguinui.s3.amazonaws.com/component-assets/carousel/default-slide-1.webp',
