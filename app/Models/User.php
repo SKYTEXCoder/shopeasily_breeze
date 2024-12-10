@@ -90,10 +90,12 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 
     public function setNameAttribute($value)
     {
-        $parts = explode(' ', $value, 2);
         $this->attributes['name'] = $value;
-        $this->attributes['first_name'] = $parts[0] ?? null;
-        $this->attributes['last_name'] = $parts[1] ?? null;
+        if (!$this->attributes['first_name'] && !$this->attributes['last_name']) {
+            $parts = explode(' ', $value, 2);
+            $this->attributes['first_name'] = $parts[0] ?? null;
+            $this->attributes['last_name'] = $parts[1] ?? null;
+        }
     }
 
     public function canAccessPanel(Panel $panel): bool
