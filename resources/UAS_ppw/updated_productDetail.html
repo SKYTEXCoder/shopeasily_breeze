@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="icon"
+      href="assets/branding/shopeasily-logo-big.png"
+      sizes="250x250"
+      type="image/png"
+    />
+    <title>ShopEasily™ - Product Details</title>
+  </head>
+  <body>
+    <!-- HEADER COMPONENT -->
+    <header class="bg-white drop-shadow-md">
+      <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <div class="md:flex md:items-center md:gap-12">
+            <a class="flex flex-row items-center space-x-2" href="#">
+              <span class="sr-only">Home</span>
+              <img
+                src="assets/branding/shopeasily-logo-big.png"
+                clas
+                alt=""
+                width="45"
+              />
+              <img
+                src="assets/branding/shopeasily-name-big.png"
+                class="ml-3"
+                alt=""
+                width="200"
+              />
+            </a>
+          </div>
+
+          <div class="hidden md:block">
+            <nav aria-label="Global">
+              <ul class="flex items-center gap-6 text-sm">
+                <li>
+                  <a
+                    class="text-gray-500 transition hover:text-gray-500/75"
+                    href="#"
+                  >
+                    Beranda
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    class="text-gray-500 transition hover:text-gray-500/75"
+                    href="#"
+                  >
+                    Katalog
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+              />
+            </svg>
+
+            <div class="sm:flex sm:gap-4">
+              <a
+                class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
+                href="#"
+              >
+                Login
+              </a>
+
+              <div class="hidden sm:flex">
+                <a
+                  class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
+                  href="#"
+                >
+                  Register
+                </a>
+              </div>
+            </div>
+
+            <div class="block md:hidden">
+              <button
+                class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END HEADER COMPONENT -->
+
+    <!-- BREADCRUMB COMPONENT -->
+    <nav aria-label="Breadcrumb" class="mt-10">
+      <div class="mx-auto">
+        <ol class="flex items-center gap-1 text-sm text-neutral-800 mt-5 ml-20">
+          <li>
+            <a
+              href="#"
+              class="font-bold block transition hover:text-neutral-950"
+              >Beranda
+            </a>
+          </li>
+
+          <li class="rtl:rotate-180">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </li>
+
+          <li>
+            <a href="#" class="font-bold block transition hover:text-black-700">
+              Iphone 11
+            </a>
+          </li>
+        </ol>
+      </div>
+    </nav>
+    <!-- END BREADCRUMB COMPONENT -->
+
+    <!-- PRODUCT DETAIL -->
+    <article
+      class="w-8/12 h-auto mx-auto bg-gray-200 shadow-md rounded-lg overflow-hidden mt-8 shadow md:shadow-xl"
+    >
+      <!-- Kontainer Produk -->
+      <div class="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
+        <!-- Gambar Produk -->
+        <a href="#" class="block shrink-0">
+          <div class="relative w-[150px] h-[196px]">
+            <!-- Gambar pertama -->
+            <img
+              src="assets/iphone_11.jpg"
+              alt="iPhone 11"
+              class="absolute inset-0 rounded-lg object-cover opacity-100 z-10 transition-opacity duration-100 hover:opacity-0"
+              width="250"
+            />
+            <!-- Gambar kedua -->
+            <img
+              src="assets/branding/varian.png"
+              alt="Varian"
+              class="absolute inset-0 rounded-lg object-cover opacity-0 z-20 transition-opacity duration-100 hover:opacity-100"
+              width="500"
+            />
+          </div>
+        </a>
+
+        <!-- SUB PRODUCT DETAIL -->
+        <div class="mt-2">
+          <div class="flex flex-row mb-3">
+            <h3 class="text-4xl font-bold sm:text-lg">Iphone 11</h3>
+            <div class="flex flex-row items-center ml-auto">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <p class="ml-2 font-bold">(5.0)</p>
+            </div>
+          </div>
+          <p class="text-sm text-gray-700">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
+            accusantium temporibus iure delectus ut totam natus nesciunt ex?
+            Ducimus, enim. Lorem ipsum dolor, sit amet consectetur adipisicing
+            elit. Ut nulla accusantium non inventore optio labore ipsam eligendi
+            tempora nobis molestiae, repellat sunt eius, quibusdam nostrum dolor
+            est officia earum beatae. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. A atque numquam, sunt cupiditate odio labore
+            obcaecati doloribus consequuntur nam incidunt id.
+          </p>
+
+          <!-- BUTTONS -->
+          <div class="flex flex-row justify-between mt-5">
+            <div
+              x-data="{ count: 0 }"
+              class="bg-white flex items-center rounded-md border-2 border-neutral-300"
+            >
+              <!-- Minus -->
+              <button
+                @click="if (count > 0) count--"
+                class="w-10 h-10 flex items-center justify-center text-lg font-bold text-gray-700 hover:bg-gray-100"
+              >
+                -
+              </button>
+              <div
+                class="inline-block mt-2 h-[25px] w-0.5 self-stretch bg-neutral-600 dark:bg-black/10"
+              ></div>
+              <!-- Counter -->
+              <div
+                class="w-12 h-10 flex items-center justify-center text-lg font-semibold"
+              >
+                <span x-text="count"></span>
+              </div>
+              <div
+                class="inline-block mt-2 h-[25px] w-0.5 self-stretch bg-neutral-600 dark:bg-black/10"
+              ></div>
+              <!-- Plus -->
+              <button
+                @click="count++"
+                class="w-10 h-10 flex items-center justify-center text-lg font-bold text-gray-700 hover:bg-gray-100"
+              >
+                +
+              </button>
+            </div>
+
+            <!-- Add to Cart -->
+            <button
+              class="bg-green-600 p-2 rounded-md text-white hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:bg-indigo-500"
+            >
+              Add to cart
+            </button>
+          </div>
+          <!-- END BUTTONS -->
+        </div>
+      </div>
+      <!-- END SUB PRODUCT DETAIL -->
+
+      <!-- SHOP NAME -->
+      <div
+        class="bg-gray-100 flex flex-row justify-left items-center border-1 border-solid border-neutral-700 rounded-lg w-[300px] h-20 m-4 ml-8"
+      >
+        <img src="assets/branding/shop.png" alt="Shop" width="80" />
+        <div class="flex flex-col">
+          <h2 class="font-bold">Toko Orafon</h2>
+          <p>Menjual barang elektronik</p>
+        </div>
+      </div>
+      <!-- END SHOP NAME -->
+    </article>
+    <!-- END PRODUCT DETAIL -->
+
+    <!-- ANOTHER PRODUCT -->
+    <div class="another-prod">
+      <section>
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+          <!-- HEADER -->
+          <header>
+            <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
+              Produk lainnya dari Toko Orafon:
+            </h2>
+          </header>
+          <!-- END HEADER -->
+          <div class="mt-8 sm:flex sm:items-center sm:justify-between">
+            <div class="block sm:hidden">
+              <button
+                class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
+              >
+                <span class="text-sm font-medium"> Filters & Sorting </span>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-4 rtl:rotate-180"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div class="hidden sm:flex sm:gap-4">
+              <div class="relative">
+                <details
+                  class="group [&_summary::-webkit-details-marker]:hidden"
+                >
+                  <summary
+                    class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
+                  >
+                    <span class="text-sm font-medium"> Availability </span>
+
+                    <span class="transition group-open:-rotate-180">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-4"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                        />
+                      </svg>
+                    </span>
+                  </summary>
+
+                  <div
+                    class="z-50 group-open:absolute group-open:top-auto group-open:mt-2 ltr:group-open:start-0"
+                  >
+                    <div class="w-96 rounded border border-gray-200 bg-white">
+                      <header class="flex items-center justify-between p-4">
+                        <span class="text-sm text-gray-700"> 0 Selected </span>
+
+                        <button
+                          type="button"
+                          class="text-sm text-gray-900 underline underline-offset-4"
+                        >
+                          Reset
+                        </button>
+                      </header>
+
+                      <ul class="space-y-1 border-t border-gray-200 p-4">
+                        <li>
+                          <label
+                            for="FilterInStock"
+                            class="inline-flex items-center gap-2"
+                          >
+                            <input
+                              type="checkbox"
+                              id="FilterInStock"
+                              class="size-5 rounded border-gray-300"
+                            />
+
+                            <span class="text-sm font-medium text-gray-700">
+                              In Stock (5+)
+                            </span>
+                          </label>
+                        </li>
+
+                        <li>
+                          <label
+                            for="FilterPreOrder"
+                            class="inline-flex items-center gap-2"
+                          >
+                            <input
+                              type="checkbox"
+                              id="FilterPreOrder"
+                              class="size-5 rounded border-gray-300"
+                            />
+
+                            <span class="text-sm font-medium text-gray-700">
+                              Pre Order (3+)
+                            </span>
+                          </label>
+                        </li>
+
+                        <li>
+                          <label
+                            for="FilterOutOfStock"
+                            class="inline-flex items-center gap-2"
+                          >
+                            <input
+                              type="checkbox"
+                              id="FilterOutOfStock"
+                              class="size-5 rounded border-gray-300"
+                            />
+
+                            <span class="text-sm font-medium text-gray-700">
+                              Out of Stock (10+)
+                            </span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              <div class="relative">
+                <details
+                  class="group [&_summary::-webkit-details-marker]:hidden"
+                >
+                  <summary
+                    class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
+                  >
+                    <span class="text-sm font-medium"> Price </span>
+
+                    <span class="transition group-open:-rotate-180">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="size-4"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                        />
+                      </svg>
+                    </span>
+                  </summary>
+
+                  <div
+                    class="z-50 group-open:absolute group-open:top-auto group-open:mt-2 ltr:group-open:start-0"
+                  >
+                    <div class="w-96 rounded border border-gray-200 bg-white">
+                      <header class="flex items-center justify-between p-4">
+                        <span class="text-sm text-gray-700">
+                          The highest price is IDR 300.000
+                        </span>
+
+                        <button
+                          type="button"
+                          class="text-sm text-gray-900 underline underline-offset-4"
+                        >
+                          Reset
+                        </button>
+                      </header>
+
+                      <div class="border-t border-gray-200 p-4">
+                        <div class="flex justify-between gap-4">
+                          <label
+                            for="FilterPriceFrom"
+                            class="flex items-center gap-2"
+                          >
+                            <span class="text-sm text-gray-600">IDR</span>
+
+                            <input
+                              type="number"
+                              id="FilterPriceFrom"
+                              placeholder="From"
+                              class="w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+                            />
+                          </label>
+
+                          <label
+                            for="FilterPriceTo"
+                            class="flex items-center gap-2"
+                          >
+                            <span class="text-sm text-gray-600">IDR</span>
+
+                            <input
+                              type="number"
+                              id="FilterPriceTo"
+                              placeholder="To"
+                              class="w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="hidden sm:block">
+              <label for="SortBy" class="sr-only">SortBy</label>
+
+              <select id="SortBy" class="h-10 rounded border-gray-300 text-sm">
+                <option>Sort By</option>
+                <option value="Title, DESC">Title, DESC</option>
+                <option value="Title, ASC">Title, ASC</option>
+                <option value="Price, DESC">Price, DESC</option>
+                <option value="Price, ASC">Price, ASC</option>
+              </select>
+            </div>
+          </div>
+
+          <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <li>
+              <a href="#" class="group block overflow-hidden">
+                <img
+                  src="assets/branding/kensington_blackbelt_rugged_case.jpg"
+                  alt=""
+                  class="h-[250px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[250px]"
+                />
+
+                <div class="relative bg-white pt-3">
+                  <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                  >
+                    Casing HP terviral
+                  </h3>
+
+                  <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900">
+                      IDR 100.000
+                    </span>
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="group block overflow-hidden">
+                <img
+                  src="assets/branding/blackshark_v2x_headset.jpg"
+                  alt=""
+                  class="h-[250px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[250px]"
+                />
+
+                <div class="relative bg-white pt-3">
+                  <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                  >
+                    Headset
+                  </h3>
+
+                  <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900">
+                      IDR 300.000
+                    </span>
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="group block overflow-hidden">
+                <img
+                  src="assets/branding/kensington_blackbelt_rugged_case.jpg"
+                  alt=""
+                  class="h-[250px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[250px]"
+                />
+
+                <div class="relative bg-white pt-3">
+                  <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                  >
+                    Casing HP terviral
+                  </h3>
+
+                  <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900">
+                      IDR 100.000
+                    </span>
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="group block overflow-hidden">
+                <img
+                  src="assets/branding/blackshark_v2x_headset.jpg"
+                  alt=""
+                  class="h-[250px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[250px]"
+                />
+
+                <div class="relative bg-white pt-3">
+                  <h3
+                    class="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4"
+                  >
+                    Headset
+                  </h3>
+
+                  <p class="mt-2">
+                    <span class="sr-only"> Regular Price </span>
+
+                    <span class="tracking-wider text-gray-900">
+                      IDR 300.000
+                    </span>
+                  </p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <!-- END ANOTHER PRODUCT -->
+
+    <!-- COMMENT SECTION -->
+    <section class="bg-white py-8 lg:py-16 antialiased">
+      <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <!-- HEADER -->
+        <header>
+          <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
+            Ulasan produk :
+          </h2>
+        </header>
+        <!-- END HEADER -->
+
+        <!-- REVIEW SECTION -->
+        <div class="max-w-2xl px-4 py-10">
+          <form class="mb-6">
+            <div
+              class="py-2 px-4 mb-4 bg-gray-200 rounded-lg rounded-t-lg border-2 border-neutral-960"
+            >
+              <div class="flex flex-row mb-2 pb-1" id="rating">
+                <label for="rating">Give product's review & rating : </label>
+                <div x-data="{ rating: 0 }" class="flex ml-auto">
+                  <!-- star 1 -->
+                  <svg
+                    x-on:click="rating= 1"
+                    x-bind:class="rating >= 1 ? 'text-yellow-400' : 'text-gray-400'"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="star size-6 cursor-pointer hover:text-yellow-400 transition duration-200 ease-in-out"
+                    data-value="1"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                    />
+                  </svg>
+                  <!-- star 2 -->
+                  <svg
+                    x-on:click="rating= 2"
+                    x-bind:class="rating >= 2 ? 'text-yellow-400' : 'text-gray-400'"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="star size-6 cursor-pointer hover:text-yellow-400 transition duration-200 ease-in-out"
+                    data-value="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                    />
+                  </svg>
+                  <!-- star 3 -->
+                  <svg
+                    x-on:click="rating= 3"
+                    x-bind:class="rating >= 3 ? 'text-yellow-400' : 'text-gray-400'"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="star size-6 cursor-pointer hover:text-yellow-400 transition duration-200 ease-in-out"
+                    data-value="3"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                    />
+                  </svg>
+                  <!-- star 4 -->
+                  <svg
+                    x-on:click="rating= 4"
+                    x-bind:class="rating >= 4 ? 'text-yellow-400' : 'text-gray-400'"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="star size-6 cursor-pointer hover:text-yellow-400 transition duration-200 ease-in-out"
+                    data-value="4"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                    />
+                  </svg>
+                  <!-- star 5 -->
+                  <svg
+                    x-on:click="rating= 5"
+                    x-bind:class="rating >= 5 ? 'text-yellow-400' : 'text-gray-400'"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="star size-6 cursor-pointer hover:text-yellow-400 transition duration-200 ease-in-out"
+                    data-value="5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                    />
+                  </svg>
+                  <!-- SHOW RATING -->
+                  <p class="mt-1 ml-1 text-sm text-gray-600">
+                    Rating: <span x-text="rating"></span>/5
+                  </p>
+                </div>
+              </div>
+              <label for="comment" class="sr-only">Your comment</label>
+              <textarea
+                id="comment"
+                rows="6"
+                class="px-0 w-full bg-gray-200 text-sm text-neutral-960 rounded-lg border-2 border-neutral-300 focus:ring-0 px-2 py-2 focus:outline-none"
+                placeholder="Write a comment..."
+                required
+              ></textarea>
+              <div class="rating">
+                <input type="number" name="rating" hidden />
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-800 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+            >
+              Kirim Ulasan
+            </button>
+          </form>
+
+          <!-- FIRST COMMENT -->
+          <article class="p-6 text-base bg-white border-t border-solid">
+            <footer class="flex justify-between items-center mb-2">
+              <div class="flex items-center">
+                <p
+                  class="inline-flex items-center mr-3 text-sm text-zinc-900 font-semibold"
+                >
+                  <img
+                    class="mr-2 w-6 h-6 rounded-full"
+                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
+                    alt="Asep Sikasep"
+                  />Asep Sikasep
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  <time pubdate datetime="2022-02-08" title="February 8th, 2022"
+                    >Feb. 8, 2024</time
+                  >
+                </p>
+              </div>
+              <div x-data="{ open: false }" class="relative inline-block">
+                <!-- Dropdown Button -->
+                <button
+                  @click="open = !open"
+                  class="inline-flex items-center p-2 text-sm border-neutral-960 font-medium text-center text-zinc-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-zinc-50"
+                  type="button"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 16 3"
+                  >
+                    <path
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                    />
+                  </svg>
+                  <span class="sr-only">Comment settings</span>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  @click.away="open = false"
+                  class="absolute mt-2 z-10 w-36 bg-white rounded divide-y divide-zinc-960 shadow"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 scale-95"
+                  x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75"
+                  x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-95"
+                >
+                  <ul class="py-1 text-sm text-zinc-900">
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Edit</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Remove</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Report</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </footer>
+            <div class="flex flex-row items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <p class="ml-2 font-bold">(5.0)</p>
+            </div>
+            <p class="text-zinc-900">
+              Barang sesuai dengan foto. Pengiriman tepat waktu. Kotaknya agak
+              sedikit penyok. Terima kasih seller
+            </p>
+            <div class="flex items-center mt-4 space-x-4">
+              <button
+                type="button"
+                class="flex items-center text-sm text-zinc-900 hover:underline font-medium"
+              >
+                <svg
+                  class="mr-1.5 w-3.5 h-3.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 18"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
+                  />
+                </svg>
+                Reply
+              </button>
+            </div>
+          </article>
+          <!-- END FIRST COMMENT -->
+
+          <!-- REPLY SECTION -->
+          <article class="p-6 mb-3 ml-6 lg:ml-12 text-base bg-white rounded-lg">
+            <footer class="flex justify-between items-center mb-2">
+              <div class="flex items-center">
+                <p
+                  class="inline-flex items-center mr-3 text-sm text-zinc-900 font-semibold"
+                >
+                  <img
+                    class="mr-2 w-6 h-6 rounded-full"
+                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    alt="Jese Leos"
+                  />Toko Orafon
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  <time
+                    pubdate
+                    datetime="2022-02-12"
+                    title="February 12th, 2022"
+                    >Feb. 12, 2024</time
+                  >
+                </p>
+              </div>
+              <div x-data="{ open: false }" class="relative inline-block">
+                <!-- Dropdown Button -->
+                <button
+                  @click="open = !open"
+                  class="inline-flex items-center p-2 text-sm border-neutral-960 font-medium text-center text-zinc-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-zinc-50"
+                  type="button"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 16 3"
+                  >
+                    <path
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                    />
+                  </svg>
+                  <span class="sr-only">Comment settings</span>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  @click.away="open = false"
+                  class="absolute mt-2 z-10 w-36 bg-white rounded divide-y divide-zinc-960 shadow"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 scale-95"
+                  x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75"
+                  x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-95"
+                >
+                  <ul class="py-1 text-sm text-zinc-900">
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Edit</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Remove</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Report</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </footer>
+            <p class="text-zinc-900">
+              Terima kasih sudah berbelanja di toko kami. Semoga senang dengan
+              barang pesanannya ☺️
+            </p>
+            <div class="flex items-center mt-4 space-x-4">
+              <button
+                type="button"
+                class="flex items-center text-sm text-zinc-900 hover:underline font-medium"
+              >
+                <svg
+                  class="mr-1.5 w-3.5 h-3.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 18"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
+                  />
+                </svg>
+                Reply
+              </button>
+            </div>
+          </article>
+          <!-- END REPLY SECTION -->
+
+          <!-- SECOND COMMENT -->
+          <article class="p-6 mb-3 text-base bg-white border-t border-zinc-400">
+            <footer class="flex justify-between items-center mb-2">
+              <div class="flex items-center">
+                <p
+                  class="inline-flex items-center mr-3 text-sm text-zinc-900 font-semibold"
+                >
+                  <img
+                    class="mr-2 w-6 h-6 rounded-full"
+                    src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
+                    alt="IShowProduct"
+                  />IShowProduct
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  <time pubdate datetime="2022-03-12" title="March 12th, 2022"
+                    >Mar. 12, 2024</time
+                  >
+                </p>
+              </div>
+              <div x-data="{ open: false }" class="relative inline-block">
+                <!-- Dropdown Button -->
+                <button
+                  @click="open = !open"
+                  class="inline-flex items-center p-2 text-sm border-neutral-960 font-medium text-center text-zinc-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-zinc-50"
+                  type="button"
+                >
+                  <svg
+                    class="w-4 h-4"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 16 3"
+                  >
+                    <path
+                      d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
+                    />
+                  </svg>
+                  <span class="sr-only">Comment settings</span>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div
+                  x-show="open"
+                  @click.away="open = false"
+                  class="absolute mt-2 z-10 w-36 bg-white rounded divide-y divide-zinc-960 shadow"
+                  x-transition:enter="transition ease-out duration-200"
+                  x-transition:enter-start="opacity-0 scale-95"
+                  x-transition:enter-end="opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75"
+                  x-transition:leave-start="opacity-100 scale-100"
+                  x-transition:leave-end="opacity-0 scale-95"
+                >
+                  <ul class="py-1 text-sm text-zinc-900">
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Edit</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Remove</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#" class="block py-2 px-4 hover:bg-zinc-960"
+                        >Report</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </footer>
+            <div class="flex flex-row items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="yellow"
+                viewBox="0 0 24 24"
+                stroke-width="0.5"
+                stroke="currentColor"
+                class="size-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+                />
+              </svg>
+              <p class="ml-2 font-bold">(5.0)</p>
+            </div>
+            <p class="text-zinc-900">
+              Barangnya sudah diterima dalam kondisi yang baik. Pengirimannya
+              cepat. Barangnya pun keren abis. Trims seller🙏
+            </p>
+            <div class="flex items-center mt-4 space-x-4">
+              <button
+                type="button"
+                class="flex items-center text-sm text-zinc-900 hover:underline font-medium"
+              >
+                <svg
+                  class="mr-1.5 w-3.5 h-3.5"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 18"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 5h5M5 8h2m6-3h2m-5 3h6m2-7H2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3v5l5-5h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"
+                  />
+                </svg>
+                Reply
+              </button>
+            </div>
+          </article>
+          <!-- END SECOND COMMENT -->
+        </div>
+        <!-- END REVIEW SECTION -->
+      </div>
+    </section>
+    <!-- END COMMENT SECTION -->
+
+    <!-- FOOTER COMPONENT -->
+    <footer class="bg-gray-200">
+      <div
+        class="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8"
+      >
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <div>
+            <div class="text-teal-600">
+              <img
+                src="assets/branding/shopeasily-name-big.png"
+                alt=""
+                width="280"
+              />
+            </div>
+
+            <p class="mt-4 max-w-xs text-gray-500">
+              3245 Grant Street Longview, <br />
+              TX United Kingdom 765378
+            </p>
+            <p class="mt-4 max-w-xs text-gray-500">021693483404</p>
+            <p class="mt-4 max-w-xs text-gray-500">kelompok1ppw@gmail.com</p>
+
+            <ul class="mt-8 flex gap-6">
+              <li>
+                <a
+                  href="#"
+                  rel="noreferrer"
+                  target="_blank"
+                  class="text-gray-700 transition hover:opacity-75"
+                >
+                  <span class="sr-only">Facebook</span>
+
+                  <svg
+                    class="size-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="#"
+                  rel="noreferrer"
+                  target="_blank"
+                  class="text-gray-700 transition hover:opacity-75"
+                >
+                  <span class="sr-only">Instagram</span>
+
+                  <svg
+                    class="size-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="#"
+                  rel="noreferrer"
+                  target="_blank"
+                  class="text-gray-700 transition hover:opacity-75"
+                >
+                  <span class="sr-only">Twitter</span>
+
+                  <svg
+                    class="size-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+                    />
+                  </svg>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="#"
+                  rel="noreferrer"
+                  target="_blank"
+                  class="text-gray-700 transition hover:opacity-75"
+                >
+                  <span class="sr-only">GitHub</span>
+
+                  <svg
+                    class="size-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div
+            class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4"
+          >
+            <div>
+              <p class="font-bold text-gray-900">SUPPORT</p>
+
+              <ul class="mt-6 space-y-4 text-sm">
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Hubungi Kami
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    About Us
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Size Guide
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Shopping & Returns
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Privacy
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p class="font-bold text-gray-900">SHOP</p>
+
+              <ul class="mt-6 space-y-4 text-sm">
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Peripherals Gaming
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Gadget Terkini
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Pakaian Pria
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Pakaian Wanita
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Pakaian Anak-Anak
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p class="font-bold text-gray-900">PERUSAHAAN</p>
+
+              <ul class="mt-6 space-y-4 text-sm">
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Tentang Kami
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Blog
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Mitra
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#" class="text-gray-700 transition hover:opacity-75">
+                    Kerjasama
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p class="font-bold text-gray-900">SUBSCRIBE TO OUR NEWSLETTER</p>
+
+              <div class="mt-6 text-sm text-gray-700">
+                <p>
+                  Dapatkan update terkini, berbagai promo, dan diskon menarik
+                  yang dikirim langsung ke email kamu
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-500">
+          Copyright &copy; 2024. Kelompok 1 PPW. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <!-- END FOOTER COMPONENT -->
+
+    <!-- SCRIPTS SECTION -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <!-- SCRIPT FOR RATING IN REVIEW FORM -->
+    <script>
+      const stars = document.querySelectorAll(".star");
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          const rating = star.getAttribute("data-value");
+          stars.forEach((s) => s.classList.remove("text-yellow-400"));
+          stars.forEach((s) => {
+            if (s.getAttribute("data-value") <= rating) {
+              s.classList.add("text-yellow-400");
+            }
+          });
+          console.log("Rating:", rating);
+        });
+      });
+    </script>
+    <!-- END SCRIPTS SECTION -->
+  </body>
+</html>
