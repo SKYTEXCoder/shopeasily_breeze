@@ -131,7 +131,7 @@ class ProductResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('final_price')
-                    ->money('IDR')
+                    ->money('IDR', 0, 'id')
                     ->sortable(),
 
                 IconColumn::make('is_featured')

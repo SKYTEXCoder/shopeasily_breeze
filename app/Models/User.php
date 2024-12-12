@@ -55,18 +55,22 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         ];
     }
 
-    /* protected static function booted()
+    protected static function booted()
     {
         // Before creating a new user
         static::creating(function ($user) {
-            $user->name = $user->first_name . ' ' . $user->last_name;
+            if (empty($user->first_name) && empty($user->last_name)) {
+                $parts = explode(' ', $user->name, 2);
+                $user->first_name = $parts[0] ?? null;
+                $user->last_name = $parts[1] ?? null;
+            }
         });
 
         // Before updating an existing user
-        static::updating(function ($user) {
+        /*static::updating(function ($user) {
             $user->name = $user->first_name . ' ' . $user->last_name;
-        });
-    } */
+        });*/
+    }
 
     public function orders() {
         return $this->hasMany(Order::class);
@@ -88,15 +92,15 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         return "{$this->first_name} {$this->last_name}";
     }
 
-    public function setNameAttribute($value)
+    /* public function setNameAttribute($value)
     {
         $this->attributes['name'] = $value;
-        if (!$this->attributes['first_name'] && !$this->attributes['last_name']) {
+        if (empty($this->attributes['first_name']) && empty($this->attributes['last_name'])) {
             $parts = explode(' ', $value, 2);
             $this->attributes['first_name'] = $parts[0] ?? null;
             $this->attributes['last_name'] = $parts[1] ?? null;
         }
-    }
+    } */
 
     public function canAccessPanel(Panel $panel): bool
     {

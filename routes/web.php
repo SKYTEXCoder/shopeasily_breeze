@@ -10,6 +10,7 @@ use App\Livewire\MyOrderDetailPage;
 use App\Livewire\MyOrdersPage;
 use App\Livewire\ProductDetailPage;
 use App\Livewire\ProductsPage;
+use App\Livewire\ProfileManagementPage;
 use App\Livewire\SuccessPage;
 use Illuminate\Support\Facades\Route;
 
@@ -18,24 +19,33 @@ use Illuminate\Support\Facades\Route;
 
  Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('dashboard');*/
 
-Route::view('profile', 'profile')
+Route::get('/your-profile', ProfileManagementPage::class)
     ->middleware(['auth'])
-    ->name('profile'); */
+    ->name('profile');
 
 Route::get('/', HomePage::class)->name('index');
 Route::get('/brands', BrandsPage::class);
 Route::get('/categories', CategoriesPage::class);
 Route::get('/products', ProductsPage::class);
-Route::get('/products/{product}', ProductDetailPage::class);
+Route::get('/products/{slug}', ProductDetailPage::class);
 Route::get('/cart', CartPage::class);
-Route::get('/checkout', CheckoutPage::class);
-Route::get('/my-orders', MyOrdersPage::class);
-Route::get('/my-orders/{order}', MyOrderDetailPage::class);
 Route::get('/contact-sales-team', )->name('contact');
 
-Route::get('/success', SuccessPage::class);
-Route::get('/cancelled', CancelPage::class);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', function() {
+        auth()->logout();
+        return redirect('/');
+    })->name('logout');
+    Route::get('/checkout', CheckoutPage::class);
+    Route::get('/my-orders', MyOrdersPage::class);
+    Route::get('/my-orders/{order}', MyOrderDetailPage::class);
+    Route::get('/success', SuccessPage::class);
+    Route::get('/cancelled', CancelPage::class);
+});
+
+Route::get('/search', ProductsPage::class)->name('search');
 
 require __DIR__.'/auth.php';

@@ -2,12 +2,18 @@
 
 namespace App\Livewire;
 
+use App\Models\Brand;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Brands Page - ShopEasily™')]
 class BrandsPage extends Component
 {
     public function render()
     {
-        return view('livewire.brands-page');
+        $brands = Brand::where('is_active', 1)->get();
+        return view('livewire.brands-page', [
+            'brands' => $brands,
+        ]);
     }
 }
