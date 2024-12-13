@@ -48,7 +48,7 @@ class ProductDetailPage extends Component
             return;
         }
 
-        $total_count = Auth::check() ? CartManagementDatabase::addItemToCartWithQty($product_id, $this->quantity) : CartManagement::addItemToCartWithQty($product_id, $this->quantity);
+        $total_count = Auth::check() ? CartManagementDatabase::addItemToCartWithExistingQty($product_id, $this->quantity) : CartManagement::addItemToCartWithExistingQty($product_id, $this->quantity);
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 

@@ -16,49 +16,57 @@ class CartPage extends Component
     public $cart_items = [];
     public $grand_total;
 
-    public function mount() {
+    public function mount()
+    {
         if (Auth::check()) {
             $this->cart_items = CartManagementDatabase::getCartItemsFromDatabase()->toArray();
             $this->grand_total = CartManagementDatabase::calculateGrandTotal();
-        }
-        else {
+        } else {
             $this->cart_items = CartManagement::getCartItemsFromCookie();
             $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
         }
     }
 
-    public function removeItem($product_id) {
+    public function removeItem($product_id)
+    {
         if (Auth::check()) {
             $this->cart_items = CartManagementDatabase::removeCartItem($product_id)->toArray();
             $this->grand_total = CartManagementDatabase::calculateGrandTotal();
-        }
-        else {
+        } else {
             $this->cart_items = CartManagement::removeCartItem($product_id);
             $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
         }
-        $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
+        $this->dispatch('update-cart-count', total_count: array_reduce($this->cart_items, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0))->to(Navbar::class);
     }
 
-    public function increaseQty($product_id) {
+    public function increaseQty($product_id)
+    {
         if (Auth::check()) {
             $this->cart_items = CartManagementDatabase::incrementQuantityToCartItem($product_id)->toArray();
             $this->grand_total = CartManagementDatabase::calculateGrandTotal();
-        }
-        else {
+        } else {
             $this->cart_items = CartManagement::incrementQuantityToCartItem($product_id);
             $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
         }
+        $this->dispatch('update-cart-count', total_count: array_reduce($this->cart_items, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0))->to(Navbar::class);
     }
 
-    public function decreaseQty($product_id) {
+    public function decreaseQty($product_id)
+    {
         if (Auth::check()) {
             $this->cart_items = CartManagementDatabase::decrementQuantityToCartItem($product_id)->toArray();
             $this->grand_total = CartManagementDatabase::calculateGrandTotal();
-        }
-        else {
+        } else {
             $this->cart_items = CartManagement::decrementQuantityToCartItem($product_id);
             $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
         }
+        $this->dispatch('update-cart-count', total_count: array_reduce($this->cart_items, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0))->to(Navbar::class);
     }
 
     public function render()

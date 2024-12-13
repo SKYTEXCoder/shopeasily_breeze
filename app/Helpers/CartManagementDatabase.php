@@ -27,14 +27,16 @@ class CartManagementDatabase
                 Cart::create([
                     'user_id' => Auth::user()->id,
                     'product_id' => $product->id,
+                    'name' => $product->name,
+                    'image' => $product->images[0],
                     'quantity' => 1,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price,
                 ]);
             }
-            return $cart_items->count() + 1;
         }
-        return $cart_items->count();
+        // Return the total quantity
+        return self::getCartItemsFromDatabase()->sum('quantity');
     }
 
     static public function addItemToCartWithQty($product_id, $qty = 1)
@@ -56,14 +58,16 @@ class CartManagementDatabase
                 Cart::create([
                     'user_id' => Auth::user()->id,
                     'product_id' => $product->id,
+                    'name' => $product->name,
+                    'image' => $product->images[0],
                     'quantity' => $qty,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price * $qty,
                 ]);
             }
-            return $cart_items->count() + 1;
         }
-        return $cart_items->count();
+        // Return the total quantity
+        return self::getCartItemsFromDatabase()->sum('quantity');
     }
 
     static public function addItemToCartWithExistingQty($product_id, $qty = 1)
@@ -85,14 +89,16 @@ class CartManagementDatabase
                 Cart::create([
                     'user_id' => Auth::user()->id,
                     'product_id' => $product->id,
+                    'name' => $product->name,
+                    'image' => $product->images[0],
                     'quantity' => $qty,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price * $qty,
                 ]);
             }
-            return $cart_items->count() + 1;
         }
-        return $cart_items->count();
+        // Return the total quantity
+        return self::getCartItemsFromDatabase()->sum('quantity');
     }
 
     static public function removeCartItem($product_id)
@@ -107,7 +113,7 @@ class CartManagementDatabase
         return self::getCartItemsFromDatabase();
     }
 
-    // This implementation doesn't follow DCodeMania's cart management logic by design (intended), it adds cart items directly to the database
+    // This implementation doesn't follow DCodeMania's cart management logic by design (intended), it adds cart items directly into the database
     static public function addCartItemsToDatabase($cart_items)
     {
         foreach ($cart_items as $item) {
@@ -116,6 +122,8 @@ class CartManagementDatabase
                 Cart::create([
                     'user_id' => Auth::user()->id,
                     'product_id' => $product->id,
+                    'name' => $product->name,
+                    'image' => $product->images[0],
                     'quantity' => $item['quantity'],
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price * $item['quantity'],
@@ -139,7 +147,6 @@ class CartManagementDatabase
     {
         $cart_items = self::getCartItemsFromDatabase();
         $existing_item = $cart_items->firstWhere('product_id', $product_id);
-
         if ($existing_item) {
             $existing_item->quantity++;
             $existing_item->total_amount = $existing_item->quantity * $existing_item->unit_amount;
@@ -187,6 +194,8 @@ class CartManagementDatabase
                             'user_id' => $user->id,
                             'product_id' => $product->id,
                             'quantity' => $cart_item_from_cookie['quantity'],
+                            'name' => $product->name,
+                            'image' => $product->images[0],
                             'unit_amount' => $product->final_price,
                             'total_amount' => $product->final_price * $cart_item_from_cookie['quantity'],
                         ]);

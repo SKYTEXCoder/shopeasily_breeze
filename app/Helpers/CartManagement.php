@@ -40,7 +40,10 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cart_items);
-        return count($cart_items);
+        $total_quantity = array_reduce($cart_items, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+        return $total_quantity;
     }
 
     // add item to cart with quantity
@@ -75,7 +78,10 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cart_items);
-        return count($cart_items);
+        $total_quantity = array_reduce($cart_items, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+        return $total_quantity;
     }
 
     // add item to cart with existing quantity
@@ -110,7 +116,10 @@ class CartManagement
         }
 
         self::addCartItemsToCookie($cart_items);
-        return count($cart_items);
+        $total_quantity = array_reduce($cart_items, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+        return $total_quantity;
     }
 
     // remove item from cart
