@@ -58,7 +58,7 @@ class ProductsPage extends Component
             return;
         }
 
-        $total_count = Auth::check() ? CartManagementDatabase::addItemToCartWithExistingQty($product_id) : CartManagement::addItemToCart($product_id);
+        $total_count = Auth::check() ? CartManagementDatabase::addItemToCart($product_id) : CartManagement::addItemToCart($product_id);
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 
@@ -118,7 +118,7 @@ class ProductsPage extends Component
         }
 
         return view('livewire.products-page', [
-            'products' => $productQuery->paginate(20),
+            'products' => $productQuery->paginate(10),
             'brands' => Brand::where('is_active', 1)->get(['id', 'name', 'slug']),
             'categories' => Category::where('is_active', 1)->get(['id', 'name', 'slug']),
             'max_price_of_queried_products' => $this->max_price_of_queried_products,

@@ -22,6 +22,18 @@ class Product extends Model
                     'total_amount' => \DB::raw("quantity * {$product->final_price}"),
                 ]);
             }
+
+            if ($product->isDirty('name')) {
+                Cart::where('product_id', $product->id)->update([
+                   'name' => $product->name,
+                ]);
+            }
+
+            if ($product->isDirty('images')) {
+                Cart::where('product_id', $product->id)->update([
+                    'image' => $product->images[0] ?? null,
+                ]);
+            }
         });
     }
 
