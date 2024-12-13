@@ -88,6 +88,10 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         return $this->hasMany(ProductComment::class, 'user_id');
     }
 
+    public function cart() {
+        return $this->hasMany(Cart::class);
+    }
+
     public function getFullNameAttribute() {
         return "{$this->first_name} {$this->last_name}";
     }

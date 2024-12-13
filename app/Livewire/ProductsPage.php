@@ -3,10 +3,12 @@
 namespace App\Livewire;
 
 use App\Helpers\CartManagement;
+use App\Helpers\CartManagementDatabase;
 use App\Livewire\Partials\Navbar;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
@@ -34,10 +36,13 @@ class ProductsPage extends Component
     #[Url]
     public $in_stock;
 
+    #[Url]
     public $price_range;
 
+    #[Url]
     public $max_price_of_queried_products;
 
+    #[Url]
     public $sort = 'latest';
 
     public function addToCart($product_id){
@@ -53,7 +58,7 @@ class ProductsPage extends Component
             return;
         }
 
-        $total_count = CartManagement::addItemToCart($product_id);
+        $total_count = Auth::check() ? CartManagementDatabase::addItemToCartWithExistingQty($product_id) : CartManagement::addItemToCart($product_id);
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 
@@ -100,8 +105,16 @@ class ProductsPage extends Component
             $productQuery->latest();
         }
 
-        if ($this->sort == 'price') {
+        if ($this->sort == 'oldest') {
+            $productQuery->oldest();
+        }
+
+        if ($this->sort == 'price-ascending') {
             $productQuery->orderBy('final_price', 'asc');
+        }
+
+        if ($this->sort == 'price-descending') {
+            $productQuery->orderBy('final_price', 'desc');
         }
 
         return view('livewire.products-page', [

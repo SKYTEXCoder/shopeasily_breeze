@@ -81,8 +81,10 @@
                             <div class="flex items-center justify-between">
                                 <select wire:model.live="sort"
                                     class="block w-40 text-base bg-gray-100 cursor-pointer dark:text-gray-400 dark:bg-gray-900">
-                                    <option value="latest">Sort by latest</option>
-                                    <option value="price">Sort by Price</option>
+                                    <option value="latest">Sort by Latest</option>
+                                    <option value="oldest">Sort by Oldest</option>
+                                    <option value="price-ascending">Sort by Price (Low to High)</option>
+                                    <option value="price-descending">Sort by Price (High to Low)</option>
                                 </select>
                             </div>
                         </div>

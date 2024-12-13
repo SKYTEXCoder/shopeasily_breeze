@@ -3,8 +3,10 @@
 namespace App\Livewire;
 
 use App\Helpers\CartManagement;
+use App\Helpers\CartManagementDatabase;
 use App\Livewire\Partials\Navbar;
 use App\Models\Product;
+use Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Attributes\Title;
@@ -46,7 +48,7 @@ class ProductDetailPage extends Component
             return;
         }
 
-        $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity);
+        $total_count = Auth::check() ? CartManagementDatabase::addItemToCartWithQty($product_id, $this->quantity) : CartManagement::addItemToCartWithQty($product_id, $this->quantity);
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 
