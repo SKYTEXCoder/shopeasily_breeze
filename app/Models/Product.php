@@ -13,6 +13,18 @@ class Product extends Model
 
     protected $casts = ['images' => 'array'];
 
+    protected static function booted()
+    {
+        static::updated(function ($product) {
+            if ($product->isDirty('final_price')) {
+                Cart::where('product_id', $product->id)->update([
+                    'unit_amount' => $product->final_price,
+                    'total_amount' => \DB::raw("quantity * {$product->final_price}"),
+                ]);
+            }
+        });
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }
@@ -35,5 +47,9 @@ class Product extends Model
 
     public function comments() {
         return $this->hasMany(ProductComment::class, 'product_id');
+    }
+
+    public function cart() {
+        return $this->hasMany(Cart::class);
     }
 }

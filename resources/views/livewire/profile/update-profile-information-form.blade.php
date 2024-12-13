@@ -92,7 +92,6 @@ new class extends Component {
 
 <section>
     <header>
-
         @if (Auth::user()->image)
             <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Picture"
                 class="w-16 h-16 rounded-full object-cover" />

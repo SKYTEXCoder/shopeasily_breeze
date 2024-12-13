@@ -3,7 +3,9 @@
 namespace App\Livewire\Partials;
 
 use App\Helpers\CartManagement;
+use App\Helpers\CartManagementDatabase;
 use App\Models\Category;
+use Auth;
 use Livewire\Component;
 use Livewire\Attributes\On;
 
@@ -13,7 +15,7 @@ class Navbar extends Component
     public $total_count = 0;
 
     public function mount() {
-        $this->total_count = count(CartManagement::getCartItemsFromCookie());
+        $this->total_count = Auth::check() ? count(CartManagementDatabase::getCartItemsFromDatabase()->toArray()) : count(CartManagement::getCartItemsFromCookie());
     }
 
     #[On('update-cart-count')]
