@@ -7,6 +7,12 @@
                     <table class="w-full border-separate border-spacing-4">
                         <thead>
                             <tr>
+                                <th class="text-center font-semibold">
+                                    <input
+                                        type="checkbox"
+                                        wire:model.live="selected_all_cart_items"
+                                        class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                </th>
                                 <th class="text-center font-semibold"></th>
                                 <th class="text-center font-semibold">Product Name</th>
                                 <th class="text-center font-semibold">Price</th>

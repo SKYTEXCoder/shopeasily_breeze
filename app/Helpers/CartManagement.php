@@ -190,6 +190,9 @@ class CartManagement
                     $cart_items[$key]['quantity']--;
                     $cart_items[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]['unit_amount'];
                 }
+                else {
+                    unset($cart_items[$key]);
+                }
                 break;
             }
         }
