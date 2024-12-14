@@ -17,18 +17,13 @@
                         <tbody>
                             @forelse ($cart_items as $item)
                                 <tr wire:key='{{ $item['product_id'] }}'>
-                                    <td class="py-4 px-2"><button
-                                            class="rounded-full p-1 hover:bg-red-500 hover:text-white hover:border-red-700"
-                                            wire:click="removeItem({{ $item['product_id'] }})">
-                                            <svg wire:loading.remove wire:target="removeItem({{ $item['product_id'] }})"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M6 18 18 6M6 6l12 12" />
-                                            </svg>
-                                            <div wire:loading wire:target="removeItem({{ $item['product_id'] }})"
-                                                class="spinner"></div>
-                                        </button></td>
+                                    <td class="py-4 px-2 text-center">
+                                        <input
+                                            type="checkbox"
+                                            wire:model.live="selected_cart_items"
+                                            value="{{ $item['product_id'] }}"
+                                            class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    </td>
                                     <td class="py-4 px-2">
                                         <div class="flex items-center">
                                             <img class="h-16 w-16 mr-4" src="{{ url('storage', $item['image']) }}"
@@ -68,6 +63,18 @@
                                     <td class="py-4 px-2">
                                         {{ Number::currency($item['total_amount'], 'IDR', 'id') }}
                                     </td>
+                                    <td class="py-4 px-2"><button
+                                        class="rounded-full p-1 hover:bg-red-500 hover:text-white hover:border-red-700"
+                                        wire:click="removeItem({{ $item['product_id'] }})">
+                                        <svg wire:loading.remove wire:target="removeItem({{ $item['product_id'] }})"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6 18 18 6M6 6l12 12" />
+                                        </svg>
+                                        <div wire:loading wire:target="removeItem({{ $item['product_id'] }})"
+                                            class="spinner"></div>
+                                    </button></td>
                                 </tr>
                             @empty
                                 <tr>
@@ -75,8 +82,6 @@
                                         There are currently no products/items in your cart.</td>
                                 </tr>
                             @endforelse
-
-                            <!-- More product rows -->
                         </tbody>
                     </table>
                 </div>
@@ -89,12 +94,12 @@
                         <span>{{ Number::currency($grand_total, 'IDR', 'id') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
-                        <span>Taxes (10% of Subtotal)</span>
-                        <span>{{ Number::currency($grand_total * 0.1, 'IDR', 'id') }}</span>
+                        <span>Taxes (1%)</span>
+                        <span>{{ Number::currency($grand_total * 0.01, 'IDR', 'id') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
                         <span>Shipping</span>
-                        @if ($cart_items)
+                        @if ($selected_cart_items)
                             <span>{{ Number::currency(28000, 'IDR', 'id') }}</span>
                         @else
                             <span>{{ Number::currency(0, 'IDR', 'id') }}</span>
@@ -104,17 +109,19 @@
                     <hr class="my-2">
                     <div class="flex justify-between mb-2">
                         <span class="font-semibold">Grand Total</span>
-                        @if ($cart_items)
+                        @if ($selected_cart_items)
                             <span
-                                class="font-semibold">{{ Number::currency($grand_total * 1.1 + 28000, 'IDR', 'id') }}</span>
+                                class="font-semibold">{{ Number::currency($grand_total * 1.01 + 28000, 'IDR', 'id') }}</span>
                         @else
                             <span class="font-semibold">{{ Number::currency(0, 'IDR', 'id') }}</span>
                         @endif
                     </div>
                     @if ($cart_items)
-                        <button
-                            class="bg-blue-500 text-base text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-900">Check
-                            Out</button>
+                        <a href="{{ url('checkout') }}">
+                            <button
+                                class="bg-blue-500 text-base text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-900">Check
+                                Out</button>
+                        </a>
                     @endif
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Cart;
 use App\Models\Product;
 use Auth;
+use DB;
 
 class CartManagementDatabase
 {
@@ -134,7 +135,7 @@ class CartManagementDatabase
 
     static public function clearCartItems()
     {
-        Cart::where('user_id', Auth::user()->id)->delete();
+        Cart::whereUserId(Auth::id())->delete();
     }
 
     static public function getCartItemsFromDatabase()
@@ -142,37 +143,39 @@ class CartManagementDatabase
         return Cart::where('user_id', Auth::user()->id)->get();
     }
 
-
     static public function incrementQuantityToCartItem($product_id)
     {
-        $cart_items = self::getCartItemsFromDatabase();
-        $existing_item = $cart_items->firstWhere('product_id', $product_id);
-        if ($existing_item) {
-            $existing_item->quantity++;
-            $existing_item->total_amount = $existing_item->quantity * $existing_item->unit_amount;
-            $existing_item->save();
-        }
+        Cart::where('user_id', Auth::user()->id)
+            ->where('product_id', $product_id)
+            ->increment('quantity');
+        Cart::where('user_id', Auth::user()->id)
+            ->where('product_id', $product_id)
+            ->update(['total_amount' => DB::raw('quantity * unit_amount')]);
         return self::getCartItemsFromDatabase();
     }
 
     static public function decrementQuantityToCartItem($product_id)
     {
-        $cart_items = self::getCartItemsFromDatabase();
-        $existing_item = $cart_items->firstWhere('product_id', $product_id);
-
-        if ($existing_item && $existing_item->quantity > 1) {
-            $existing_item->quantity--;
-            $existing_item->total_amount = $existing_item->quantity * $existing_item->unit_amount;
-            $existing_item->save();
-        } else {
-            $existing_item->delete();
-        }
+        Cart::where('user_id', Auth::user()->id)
+            ->where('product_id', $product_id)
+            ->where('quantity', '>', 1)
+            ->decrement('quantity');
+        Cart::where('user_id', Auth::user()->id)
+            ->where('product_id', $product_id)
+            ->where('quantity', 1)
+            ->delete();
         return self::getCartItemsFromDatabase();
     }
 
-    static public function calculateGrandTotal()
+    static public function calculateGrandTotal($selected_cart_items = [])
     {
-        return Cart::where('user_id', Auth::user()->id)->sum('total_amount');
+        if (empty($selected_cart_items)) {
+            return 0;
+        }
+        return Cart::where('user_id', Auth::id())
+            ->whereIn('product_id', $selected_cart_items)
+            ->selectRaw('SUM(total_amount) as total')
+            ->value('total');
     }
 
     static public function mergeCartFromCookieToDatabase()

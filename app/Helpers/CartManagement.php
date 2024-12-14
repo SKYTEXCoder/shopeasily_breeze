@@ -198,8 +198,13 @@ class CartManagement
     }
 
     // calculate grand total
-    static public function calculateGrandTotal($items)
+    static public function calculateGrandTotal($items, $selected_cart_items = [])
     {
+        if (!empty($selected_cart_items)) {
+            $items = array_filter($items, function ($item) use ($selected_cart_items) {
+                return in_array($item['product_id'], $selected_cart_items);
+            });
+        }
         return array_sum(array_column($items, 'total_amount'));
     }
 
