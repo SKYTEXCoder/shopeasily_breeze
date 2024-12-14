@@ -156,14 +156,18 @@ class CartManagementDatabase
 
     static public function decrementQuantityToCartItem($product_id)
     {
-        Cart::where('user_id', Auth::user()->id)
-            ->where('product_id', $product_id)
-            ->where('quantity', '>', 1)
-            ->decrement('quantity');
-        Cart::where('user_id', Auth::user()->id)
-            ->where('product_id', $product_id)
-            ->where('quantity', 1)
-            ->delete();
+        $cart_items = self::getCartItemsFromDatabase();
+        $existing_item = $cart_items->firstWhere('product_id', $product_id);
+        if ($existing_item) {
+            if ($existing_item->quantity > 1) {
+                $existing_item->quantity--;
+                $existing_item->total_amount = $existing_item->quantity * $existing_item->unit_amount;
+                $existing_item->save();
+            }
+            else {
+                $existing_item->delete();
+            }
+        }
         return self::getCartItemsFromDatabase();
     }
 

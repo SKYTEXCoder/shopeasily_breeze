@@ -16,8 +16,9 @@ class CartPage extends Component
 
     public $cart_items = [];
     public $selected_cart_items = [];
+    public $selected_all_cart_items = true;
     public $grand_total;
-    public $select_all = true;
+
 
     public function mount()
     {
@@ -34,6 +35,12 @@ class CartPage extends Component
 
     public function updatedSelectedCartItems()
     {
+        $this->selected_all_cart_items = count($this->selected_cart_items) == count(array_column($this->cart_items, 'product_id'));
+        $this->grand_total = Auth::check() ? CartManagementDatabase::calculateGrandTotal($this->selected_cart_items) : CartManagement::calculateGrandTotal($this->cart_items, $this->selected_cart_items);
+    }
+
+    public function updatedSelectedAllCartItems() {
+        $this->selected_cart_items = $this->selected_all_cart_items ? array_column($this->cart_items, 'product_id') : [];
         $this->grand_total = Auth::check() ? CartManagementDatabase::calculateGrandTotal($this->selected_cart_items) : CartManagement::calculateGrandTotal($this->cart_items, $this->selected_cart_items);
     }
 

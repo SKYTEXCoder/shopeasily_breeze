@@ -34,6 +34,10 @@ class Product extends Model
                     'image' => $product->images[0] ?? null,
                 ]);
             }
+
+            if ($product->isDirty('slug')) {
+                //
+            }
         });
     }
 
