@@ -15,7 +15,7 @@ class Navbar extends Component
     public $total_count = 0;
 
     public function mount() {
-        $this->total_count = Auth::check() ? array_reduce(CartManagementDatabase::getCartItemsFromDatabase()->toArray(), function($carry, $item) {
+        $this->total_count = Auth::check() ? array_reduce(CartManagementDatabase::getCartItemsFromDatabase(columns: ['quantity'])->toArray(), function($carry, $item) {
             return $carry + $item['quantity'];
         }, 0) : array_reduce(CartManagement::getCartItemsFromCookie(), function($carry, $item) {
             return $carry + $item['quantity'];

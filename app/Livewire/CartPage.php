@@ -16,6 +16,7 @@ class CartPage extends Component
 
     public $cart_items = [];
     public $selected_cart_items = [];
+    public $deselected_cart_items =[];
     public $selected_all_cart_items = true;
     public $grand_total;
 
@@ -23,7 +24,7 @@ class CartPage extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $this->cart_items = CartManagementDatabase::getCartItemsFromDatabase()->toArray();
+            $this->cart_items = CartManagementDatabase::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount'])->toArray();
             $this->selected_cart_items = array_column($this->cart_items, 'product_id');
             $this->grand_total = CartManagementDatabase::calculateGrandTotal($this->selected_cart_items);
         } else {
@@ -78,7 +79,7 @@ class CartPage extends Component
     public function decreaseQty($product_id)
     {
         $this->cart_items = Auth::check() ? CartManagementDatabase::decrementQuantityToCartItem($product_id)->toArray() : CartManagement::decrementQuantityToCartItem($product_id);
-        $this->selected_cart_items = array_values(array_filter(array_column($this->cart_items, 'product_id'), function ($product_id) {
+        $this->selected_cart_items = array_values(array_filter($this->selected_cart_items, function ($product_id) {
             $item = current(array_filter($this->cart_items, function ($item) use ($product_id) {
                 return $item['product_id'] == $product_id;
             }));
