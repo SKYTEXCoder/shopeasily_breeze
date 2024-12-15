@@ -17,7 +17,6 @@
     </head>
     <body class="bg-slate-100 dark:bg-slate-950">
         <div class="sticky top-0 z-50">
-            @livewire('partials.authenticated-as-indicator')
             @livewire('partials.navbar')
         </div>
         <main>

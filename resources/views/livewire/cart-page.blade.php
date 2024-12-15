@@ -1,32 +1,29 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
     <div class="container mx-auto px-4">
-        <h1 class="text-2xl font-semibold mb-4">Shopping Cart</h1>
+        <h1 class="text-2xl font-semibold mb-4">Your Shopping Cart</h1>
         <div class="flex flex-col md:flex-row gap-4">
             <div class="md:w-3/4">
                 <div class="bg-white overflow-x-auto rounded-lg shadow-md p-6 mb-4">
                     <table class="w-full border-separate border-spacing-4">
-                        <thead>
-                            <tr>
-                                <th class="text-center font-semibold">
-                                    <input
-                                        type="checkbox"
-                                        wire:model.live="selected_all_cart_items"
-                                        class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-                                </th>
-                                <th class="text-center font-semibold"></th>
-                                <th class="text-center font-semibold">Product Name</th>
-                                <th class="text-center font-semibold">Price</th>
-                                <th class="text-center font-semibold">Quantity</th>
-                                <th class="text-center font-semibold">Total</th>
-                            </tr>
-                        </thead>
+                        @if (!empty($cart_items))
+                            <thead>
+                                <tr>
+                                    <th class="flex flex-coltext-center font-semibold">
+                                        <input type="checkbox" wire:model.live="selected_all_cart_items"
+                                            class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    </th>
+                                    <th class="text-center font-semibold">Product Name</th>
+                                    <th class="text-center font-semibold">Price</th>
+                                    <th class="text-center font-semibold">Quantity</th>
+                                    <th class="text-center font-semibold">Total Price</th>
+                                </tr>
+                            </thead>
+                        @endif
                         <tbody>
                             @forelse ($cart_items as $item)
                                 <tr wire:key='{{ $item['product_id'] }}'>
                                     <td class="py-4 px-2 text-center">
-                                        <input
-                                            type="checkbox"
-                                            wire:model.live="selected_cart_items"
+                                        <input type="checkbox" wire:model.live="selected_cart_items"
                                             value="{{ $item['product_id'] }}"
                                             class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                     </td>
@@ -70,22 +67,23 @@
                                         {{ Number::currency($item['total_amount'], 'IDR', 'id') }}
                                     </td>
                                     <td class="py-4 px-2"><button
-                                        class="rounded-full p-1 hover:bg-red-500 hover:text-white hover:border-red-700"
-                                        wire:click="removeItem({{ $item['product_id'] }})">
-                                        <svg wire:loading.remove wire:target="removeItem({{ $item['product_id'] }})"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6 18 18 6M6 6l12 12" />
-                                        </svg>
-                                        <div wire:loading wire:target="removeItem({{ $item['product_id'] }})"
-                                            class="spinner"></div>
-                                    </button></td>
+                                            class="rounded-full p-1 hover:bg-red-500 hover:text-white hover:border-red-700"
+                                            wire:click="removeItem({{ $item['product_id'] }})">
+                                            <svg wire:loading.remove
+                                                wire:target="removeItem({{ $item['product_id'] }})"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18 18 6M6 6l12 12" />
+                                            </svg>
+                                            <div wire:loading wire:target="removeItem({{ $item['product_id'] }})"
+                                                class="spinner"></div>
+                                        </button></td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="5" class="text-center py-4 text-4xl font-semibold text-slate-500">
-                                        There are currently no products/items in your cart.</td>
+                                        There are currently no products/items <br>in your shopping cart.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -123,7 +121,7 @@
                         @endif
                     </div>
                     @if ($cart_items)
-                        <a href="{{ url('checkout') }}">
+                        <a wire:navigate href="{{ url('checkout') }}">
                             <button
                                 class="bg-blue-500 text-base text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-900">Check
                                 Out</button>
@@ -155,5 +153,5 @@
     </style>
 </div>
 
-<!-- TODO: 1: Maybe make it so that a loading animation appears when the customer clicks the remove button DONE
-    2: Figure out how to properly send the user's cart data to the checkout page when they click the checkout button-->
+<!-- TODO: 1: Maybe make it so that a loading animation appears when the customer clicks the remove button (and/or any of the other buttons that requires the server to send a response back to the client before updating the front-end) DONE
+    2: Figure out how to properly send the customer's cart items data (with respect to the selected cart items) to the checkout page when they click the checkout button-->
