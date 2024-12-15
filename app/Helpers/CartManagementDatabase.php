@@ -11,7 +11,7 @@ class CartManagementDatabase
 {
     static public function addItemToCart($product_id)
     {
-        $cart_items = self::getCartItemsFromDatabase();
+        $cart_items = self::getCartItemsFromDatabase(columns: ['id', 'quantity', 'total_amount', 'unit_amount', 'product_id']);
 
         $existing_item = $cart_items->firstWhere('product_id', $product_id);
 
@@ -37,12 +37,12 @@ class CartManagementDatabase
             }
         }
         // Return the total quantity
-        return self::getCartItemsFromDatabase()->sum('quantity');
+        return self::getCartItemsFromDatabase(columns: ['quantity'])->sum('quantity');
     }
 
     static public function addItemToCartWithQty($product_id, $qty = 1)
     {
-        $cart_items = self::getCartItemsFromDatabase();
+        $cart_items = self::getCartItemsFromDatabase(columns: ['id','quantity', 'total_amount', 'unit_amount', 'product_id']);
 
         $existing_item = $cart_items->firstWhere('product_id', $product_id);
 
@@ -68,12 +68,12 @@ class CartManagementDatabase
             }
         }
         // Return the total quantity
-        return self::getCartItemsFromDatabase()->sum('quantity');
+        return self::getCartItemsFromDatabase(columns: ['quantity'])->sum('quantity');
     }
 
     static public function addItemToCartWithExistingQty($product_id, $qty = 1)
     {
-        $cart_items = self::getCartItemsFromDatabase();
+        $cart_items = self::getCartItemsFromDatabase(columns: ['id', 'quantity', 'total_amount', 'unit_amount', 'product_id']);
 
         $existing_item = $cart_items->firstWhere('product_id', $product_id);
 
@@ -99,7 +99,7 @@ class CartManagementDatabase
             }
         }
         // Return the total quantity
-        return self::getCartItemsFromDatabase()->sum('quantity');
+        return self::getCartItemsFromDatabase(columns: ['quantity'])->sum('quantity');
     }
 
     static public function removeCartItem($product_id)
@@ -111,7 +111,7 @@ class CartManagementDatabase
         if ($cart_item) {
             $cart_item->delete();
         }
-        return self::getCartItemsFromDatabase();
+        return self::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount']);
     }
 
     // This implementation doesn't follow DCodeMania's cart management logic by design (intended), it adds cart items directly into the database
@@ -133,14 +133,19 @@ class CartManagementDatabase
         }
     }
 
-    static public function clearCartItems()
+    static public function clearCartItems($selected_cart_items = [])
     {
         Cart::whereUserId(Auth::id())->delete();
     }
 
-    static public function getCartItemsFromDatabase()
+    static public function getCartItemsFromDatabase($selected_cart_items = [], $columns = ['*'])
     {
-        return Cart::where('user_id', Auth::user()->id)->get();
+        if (!empty($selected_cart_items)) {
+            return Cart::where('user_id', Auth::user()->id)
+                ->whereIn('product_id', $selected_cart_items)
+                ->get($columns);
+        }
+        return Cart::where('user_id', Auth::user()->id)->get($columns);
     }
 
     static public function incrementQuantityToCartItem($product_id)
@@ -151,12 +156,12 @@ class CartManagementDatabase
         Cart::where('user_id', Auth::user()->id)
             ->where('product_id', $product_id)
             ->update(['total_amount' => DB::raw('quantity * unit_amount')]);
-        return self::getCartItemsFromDatabase();
+        return self::getCartItemsFromDatabase(columns:['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount']);
     }
 
     static public function decrementQuantityToCartItem($product_id)
     {
-        $cart_items = self::getCartItemsFromDatabase();
+        $cart_items = self::getCartItemsFromDatabase(columns: ['id', 'quantity', 'total_amount', 'unit_amount', 'product_id']);
         $existing_item = $cart_items->firstWhere('product_id', $product_id);
         if ($existing_item) {
             if ($existing_item->quantity > 1) {
@@ -168,7 +173,7 @@ class CartManagementDatabase
                 $existing_item->delete();
             }
         }
-        return self::getCartItemsFromDatabase();
+        return self::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount']);
     }
 
     static public function calculateGrandTotal($selected_cart_items = [])
