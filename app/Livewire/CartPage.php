@@ -77,13 +77,14 @@ class CartPage extends Component
 
     public function decreaseQty($product_id)
     {
-        if (Auth::check()) {
-            $this->cart_items = CartManagementDatabase::decrementQuantityToCartItem($product_id)->toArray();
-            $this->grand_total = CartManagementDatabase::calculateGrandTotal($this->selected_cart_items);
-        } else {
-            $this->cart_items = CartManagement::decrementQuantityToCartItem($product_id);
-            $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items, $this->selected_cart_items);
-        }
+        $this->cart_items = Auth::check() ? CartManagementDatabase::decrementQuantityToCartItem($product_id)->toArray() : CartManagement::decrementQuantityToCartItem($product_id);
+        $this->selected_cart_items = array_values(array_filter(array_column($this->cart_items, 'product_id'), function ($product_id) {
+            $item = current(array_filter($this->cart_items, function ($item) use ($product_id) {
+                return $item['product_id'] == $product_id;
+            }));
+            return $item && $item['quantity'] > 0;
+        }));
+        $this->grand_total = Auth::check() ? CartManagementDatabase::calculateGrandTotal($this->selected_cart_items) : CartManagement::calculateGrandTotal($this->cart_items, $this->selected_cart_items);
         $this->dispatch('update-cart-count', total_count: array_reduce($this->cart_items, function ($carry, $item) {
             return $carry + $item['quantity'];
         }, 0))->to(Navbar::class);

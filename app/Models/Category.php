@@ -12,7 +12,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'slug', 'image', 'is_active'];
+    protected $fillable = ['parent_category_id', 'name', 'description', 'slug', 'image', 'is_active'];
 
     public function products() {
         return $this->hasMany(Product::class);
@@ -42,5 +42,15 @@ class Category extends Model
 
     public function children_category_recursive() {
         return $this->children_category()->with('children_category_recursive');
+    }
+
+    public function children_category_recursive_flatten() {
+        $result = collect();
+        $item = $this->children_category_recursive;
+        if ($item instanceof Category) {
+            $result->push($item);
+            $result = $result->merge($item->children_category_recursive_flatten());
+        }
+        return $result;
     }
 }
