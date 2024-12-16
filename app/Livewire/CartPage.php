@@ -105,6 +105,12 @@ class CartPage extends Component
         }, 0))->to(Navbar::class);
     }
 
+    public function proceedToCheckout() {
+        return redirect()->route('checkout', [
+            'selected_cart_items' => json_encode($this->selected_cart_items),
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.cart-page');

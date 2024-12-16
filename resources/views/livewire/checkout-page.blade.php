@@ -140,10 +140,10 @@
                 </div>
                 <div class="flex justify-between mb-2 font-bold">
                     <span>
-                        Taxes
+                        Taxes (1%)
                     </span>
                     <span>
-                        {{ Number::currency($grand_total * 0.1, 'IDR', 'id') }}
+                        {{ Number::currency($grand_total * 0.01, 'IDR', 'id') }}
                     </span>
                 </div>
                 <div class="flex justify-between mb-2 font-bold">
@@ -160,7 +160,7 @@
                         Grand Total
                     </span>
                     <span>
-                        {{ Number::currency($grand_total * 1.1 + 28000, 'IDR', 'id') }}
+                        {{ Number::currency($grand_total * 1.01 + 28000, 'IDR', 'id') }}
                     </span>
                 </div>
                 </hr>
