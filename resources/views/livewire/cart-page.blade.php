@@ -134,7 +134,7 @@
                         @endif
                     </div>
                     @if ($selected_cart_items)
-                        <a wire:navigate href="{{ url('checkout') }}">
+                        <a wire:navigate href="{{ url('checkout') }}?selected_cart_items={{ urlencode(json_encode($selected_cart_items)) }}">
                             <button
                                 class="bg-blue-500 text-base text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-900">Check
                                 Out</button>

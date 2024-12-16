@@ -30,7 +30,7 @@ Route::get('/brands', BrandsPage::class);
 Route::get('/categories', CategoriesPage::class);
 Route::get('/products', ProductsPage::class);
 Route::get('/products/{slug}', ProductDetailPage::class);
-Route::get('/cart', CartPage::class);
+Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/contact-sales-team', )->name('contact');
 
 
