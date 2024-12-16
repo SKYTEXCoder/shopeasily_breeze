@@ -8,14 +8,25 @@
                         @if (!empty($cart_items))
                             <thead>
                                 <tr>
-                                    <th class="flex flex-coltext-center font-semibold">
-                                        <input type="checkbox" wire:model.live="selected_all_cart_items"
-                                            class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm text-center font-semibold text-gray-600">Select All</span>
+                                    <th class="text-center font-semibold">
+                                        <div class="flex flex-col items-center">
+                                            <input type="checkbox" wire:model.live="selected_all_cart_items"
+                                                class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        </div>
                                     </th>
                                     <th class="text-center font-semibold">Product Name</th>
                                     <th class="text-center font-semibold">Price</th>
                                     <th class="text-center font-semibold">Quantity</th>
                                     <th class="text-center font-semibold">Total Price</th>
+                                    <th class="text-center font-semibold">
+                                        <button class="hover:text-red-600"
+                                            wire:click="removeAllSelectedCartItems()">
+                                            <span class="fa-solid fa-trash" wire:loading.remove
+                                                wire:target="removeAllSelectedCartItems()"></span>
+                                            <div wire:loading wire:target="removeAllSelectedCartItems()" class="spinner"></div>
+                                        </button>
+                                    </th>
                                 </tr>
                             </thead>
                         @endif
@@ -28,11 +39,13 @@
                                             class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                     </td>
                                     <td class="py-4 px-2">
-                                        <div class="flex items-center">
-                                            <img class="h-16 w-16 mr-4" src="{{ url('storage', $item['image']) }}"
-                                                alt="{{ $item['name'] }}">
-                                            <span class="font-semibold">{{ $item['name'] }}</span>
-                                        </div>
+                                        <a wire:navigate href="{{ url('products/' . $item['slug']) }}">
+                                            <div class="flex items-center">
+                                                <img class="h-16 w-16 mr-4" src="{{ url('storage', $item['image']) }}"
+                                                    alt="{{ $item['name'] }}">
+                                                <span class="font-semibold">{{ $item['name'] }}</span>
+                                            </div>
+                                        </a>
                                     </td>
                                     <td class="py-4 px-2">{{ Number::currency($item['unit_amount'], 'IDR', 'id') }}</td>
                                     <td class="py-4 px-2">
@@ -91,7 +104,7 @@
                 </div>
             </div>
             <div class="md:w-1/4">
-                <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-[80px]">
                     <h2 class="text-lg font-semibold mb-4">Summary</h2>
                     <div class="flex justify-between mb-2">
                         <span>Subtotal</span>
@@ -120,7 +133,7 @@
                             <span class="font-semibold">{{ Number::currency(0, 'IDR', 'id') }}</span>
                         @endif
                     </div>
-                    @if ($cart_items)
+                    @if ($selected_cart_items)
                         <a wire:navigate href="{{ url('checkout') }}">
                             <button
                                 class="bg-blue-500 text-base text-white py-2 px-4 rounded-lg mt-4 w-full hover:bg-blue-900">Check

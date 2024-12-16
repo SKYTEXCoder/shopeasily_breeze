@@ -36,7 +36,9 @@ class Product extends Model
             }
 
             if ($product->isDirty('slug')) {
-                //
+                Cart::where('product_id', $product->id)->update([
+                    'slug' => $product->slug,
+                ]);
             }
         });
     }

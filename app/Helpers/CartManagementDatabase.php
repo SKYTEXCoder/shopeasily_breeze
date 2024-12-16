@@ -30,6 +30,7 @@ class CartManagementDatabase
                     'product_id' => $product->id,
                     'name' => $product->name,
                     'image' => $product->images[0],
+                    'slug' => $product->slug,
                     'quantity' => 1,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price,
@@ -61,6 +62,7 @@ class CartManagementDatabase
                     'product_id' => $product->id,
                     'name' => $product->name,
                     'image' => $product->images[0],
+                    'slug' => $product->slug,
                     'quantity' => $qty,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price * $qty,
@@ -92,6 +94,7 @@ class CartManagementDatabase
                     'product_id' => $product->id,
                     'name' => $product->name,
                     'image' => $product->images[0],
+                    'slug' => $product->slug,
                     'quantity' => $qty,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price * $qty,
@@ -111,7 +114,16 @@ class CartManagementDatabase
         if ($cart_item) {
             $cart_item->delete();
         }
-        return self::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount']);
+        return self::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'slug', 'quantity', 'total_amount', 'unit_amount']);
+    }
+
+    static public function removeCartItems($selected_cart_items)
+    {
+        $cart_items = Cart::where('user_id', Auth::user()->id)->whereIn('product_id', $selected_cart_items);
+        if ($cart_items->count() > 0) {
+            $cart_items->delete();
+        }
+        return self::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'slug', 'quantity', 'total_amount', 'unit_amount']);
     }
 
     // This implementation doesn't follow DCodeMania's cart management logic by design (intended), it adds cart items directly into the database
@@ -125,6 +137,7 @@ class CartManagementDatabase
                     'product_id' => $product->id,
                     'name' => $product->name,
                     'image' => $product->images[0],
+                    'slug' => $product->slug,
                     'quantity' => $item['quantity'],
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price * $item['quantity'],
@@ -156,7 +169,7 @@ class CartManagementDatabase
         Cart::where('user_id', Auth::user()->id)
             ->where('product_id', $product_id)
             ->update(['total_amount' => DB::raw('quantity * unit_amount')]);
-        return self::getCartItemsFromDatabase(columns:['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount']);
+        return self::getCartItemsFromDatabase(columns:['product_id', 'name', 'image', 'slug', 'quantity', 'total_amount', 'unit_amount']);
     }
 
     static public function decrementQuantityToCartItem($product_id)
@@ -173,7 +186,7 @@ class CartManagementDatabase
                 $existing_item->delete();
             }
         }
-        return self::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount']);
+        return self::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'slug', 'quantity', 'total_amount', 'unit_amount']);
     }
 
     static public function calculateGrandTotal($selected_cart_items = [])
@@ -208,6 +221,7 @@ class CartManagementDatabase
                             'quantity' => $cart_item_from_cookie['quantity'],
                             'name' => $product->name,
                             'image' => $product->images[0],
+                            'slug' => $product->slug,
                             'unit_amount' => $product->final_price,
                             'total_amount' => $product->final_price * $cart_item_from_cookie['quantity'],
                         ]);

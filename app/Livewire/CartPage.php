@@ -24,7 +24,7 @@ class CartPage extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $this->cart_items = CartManagementDatabase::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'quantity', 'total_amount', 'unit_amount'])->toArray();
+            $this->cart_items = CartManagementDatabase::getCartItemsFromDatabase(columns: ['product_id', 'name', 'image', 'slug', 'quantity', 'total_amount', 'unit_amount'])->toArray();
             $this->selected_cart_items = array_column($this->cart_items, 'product_id');
             $this->grand_total = CartManagementDatabase::calculateGrandTotal($this->selected_cart_items);
         } else {
@@ -57,6 +57,20 @@ class CartPage extends Component
             $this->cart_items = CartManagement::removeCartItem($product_id);
             $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items, $this->selected_cart_items);
         }
+        $this->dispatch('update-cart-count', total_count: array_reduce($this->cart_items, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0))->to(Navbar::class);
+    }
+
+    public function removeAllSelectedCartItems() {
+        if (Auth::check()) {
+            $this->cart_items = CartManagementDatabase::removeCartItems($this->selected_cart_items)->toArray();
+            $this->grand_total = CartManagementDatabase::calculateGrandTotal();
+        } else {
+            $this->cart_items = CartManagement::removeCartItems($this->selected_cart_items);
+            $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
+        }
+        $this->selected_cart_items = [];
         $this->dispatch('update-cart-count', total_count: array_reduce($this->cart_items, function ($carry, $item) {
             return $carry + $item['quantity'];
         }, 0))->to(Navbar::class);

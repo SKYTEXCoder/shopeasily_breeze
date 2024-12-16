@@ -26,12 +26,13 @@ class CartManagement
             $cart_items[$existing_item]['quantity']++;
             $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
         } else {
-            $product = Product::where('id', $product_id)->first(['id', 'name', 'final_price', 'images']);
+            $product = Product::where('id', $product_id)->first(['id', 'name', 'slug', 'final_price', 'images']);
             if ($product) {
                 $cart_items[] = [
                     'product_id' => $product->id,
                     'name' => $product->name,
                     'image' => $product->images[0],
+                    'slug' => $product->slug,
                     'quantity' => 1,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price,
@@ -64,12 +65,13 @@ class CartManagement
             $cart_items[$existing_item]['quantity'] = $qty;
             $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
         } else {
-            $product = Product::where('id', $product_id)->first(['id', 'name', 'final_price', 'images']);
+            $product = Product::where('id', $product_id)->first(['id', 'name', 'slug', 'final_price', 'images']);
             if ($product) {
                 $cart_items[] = [
                     'product_id' => $product->id,
                     'name' => $product->name,
                     'image' => $product->images[0],
+                    'slug' => $product->slug,
                     'quantity' => $qty,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price,
@@ -102,12 +104,13 @@ class CartManagement
             $cart_items[$existing_item]['quantity'] = $cart_items[$existing_item]['quantity'] + $qty;
             $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
         } else {
-            $product = Product::where('id', $product_id)->first(['id', 'name', 'final_price', 'images']);
+            $product = Product::where('id', $product_id)->first(['id', 'name', 'slug', 'final_price', 'images']);
             if ($product) {
                 $cart_items[] = [
                     'product_id' => $product->id,
                     'name' => $product->name,
                     'image' => $product->images[0],
+                    'slug' => $product->slug,
                     'quantity' => $qty,
                     'unit_amount' => $product->final_price,
                     'total_amount' => $product->final_price,
@@ -126,16 +129,25 @@ class CartManagement
     static public function removeCartItem($product_id)
     {
         $cart_items = self::getCartItemsFromCookie();
-
         foreach ($cart_items as $key => $item) {
             if ($item['product_id'] == $product_id) {
                 unset($cart_items[$key]);
                 break;
             }
         }
-
         self::addCartItemsToCookie($cart_items);
+        return $cart_items;
+    }
 
+    static public function removeCartItems($selected_cart_items)
+    {
+        $cart_items = self::getCartItemsFromCookie();
+        foreach ($cart_items as $key => $item) {
+            if (in_array($item['product_id'], $selected_cart_items)) {
+                unset($cart_items[$key]);
+            }
+        }
+        self::addCartItemsToCookie($cart_items);
         return $cart_items;
     }
 
@@ -189,8 +201,7 @@ class CartManagement
                 if ($cart_items[$key]['quantity'] > 1) {
                     $cart_items[$key]['quantity']--;
                     $cart_items[$key]['total_amount'] = $cart_items[$key]['quantity'] * $cart_items[$key]['unit_amount'];
-                }
-                else {
+                } else {
                     unset($cart_items[$key]);
                 }
                 break;
