@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Helpers\CartManagementDatabase;
+use App\Helpers\DatabaseCartManagement;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
@@ -11,8 +11,8 @@ class CheckoutPage extends Component
 {
     public function render()
     {
-        $cart_items = CartManagementDatabase::getCartItemsFromDatabase();
-        $grand_total = CartManagementDatabase::calculateGrandTotal();
+        $cart_items = DatabaseCartManagement::getCartItemsFromDatabase();
+        $grand_total = DatabaseCartManagement::calculateGrandTotal();
         return view('livewire.checkout-page', [
             'cart_items' => $cart_items,
             'grand_total' => $grand_total
