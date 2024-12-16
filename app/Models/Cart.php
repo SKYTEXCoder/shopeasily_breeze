@@ -11,6 +11,7 @@ class Cart extends Model
         'product_id',
         'name',
         'image',
+        'slug',
         'quantity',
         'unit_amount',
         'total_amount',
