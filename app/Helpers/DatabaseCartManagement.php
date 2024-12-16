@@ -7,7 +7,7 @@ use App\Models\Product;
 use Auth;
 use DB;
 
-class CartManagementDatabase
+class DatabaseCartManagement
 {
     static public function addItemToCart($product_id)
     {
@@ -204,7 +204,7 @@ class CartManagementDatabase
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $cart_items_from_cookie = CartManagement::getCartItemsFromCookie();
+            $cart_items_from_cookie = CookieCartManagement::getCartItemsFromCookie();
             $cart_items_from_database = self::getCartItemsFromDatabase();
             foreach ($cart_items_from_cookie as $cart_item_from_cookie) {
                 $existing_database_item = $cart_items_from_database->firstWhere('product_id', $cart_item_from_cookie['product_id']);
@@ -228,7 +228,7 @@ class CartManagementDatabase
                     }
                 }
             }
-            CartManagement::clearCartItems();
+            CookieCartManagement::clearCartItems();
         }
     }
 }

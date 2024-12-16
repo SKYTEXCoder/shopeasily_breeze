@@ -5,7 +5,7 @@ namespace App\Helpers;
 use App\Models\Product;
 use Cookie;
 
-class CartManagement
+class CookieCartManagement
 {
 
     // add item to cart

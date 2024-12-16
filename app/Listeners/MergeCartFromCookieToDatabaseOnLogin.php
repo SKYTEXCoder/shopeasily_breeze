@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Helpers\CartManagementDatabase;
+use App\Helpers\DatabaseCartManagement;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Auth\Events\Login;
@@ -26,6 +26,6 @@ class MergeCartFromCookieToDatabaseOnLogin
     public function handle(object $event): void
     {
         $user = $event->user;
-        CartManagementDatabase::mergeCartFromCookieToDatabase();
+        DatabaseCartManagement::mergeCartFromCookieToDatabase();
     }
 }
