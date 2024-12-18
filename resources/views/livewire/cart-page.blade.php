@@ -111,13 +111,13 @@
                         <span>{{ Number::currency($grand_total, 'IDR', 'id') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
-                        <span>Taxes (1%)</span>
-                        <span>{{ Number::currency($grand_total * 0.01, 'IDR', 'id') }}</span>
+                        <span>Taxes ({{ $tax_percentage * 100 }}%)</span>
+                        <span>{{ Number::currency($tax_cost, 'IDR', 'id') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
-                        <span>Shipping</span>
+                        <span>Shipping Cost</span>
                         @if ($selected_cart_items)
-                            <span>{{ Number::currency(28000, 'IDR', 'id') }}</span>
+                            <span>{{ Number::currency($shipping_cost, 'IDR', 'id') }}</span>
                         @else
                             <span>{{ Number::currency(0, 'IDR', 'id') }}</span>
                         @endif
@@ -128,7 +128,7 @@
                         <span class="font-semibold">Grand Total</span>
                         @if ($selected_cart_items)
                             <span
-                                class="font-semibold">{{ Number::currency($grand_total * 1.01 + 28000, 'IDR', 'id') }}</span>
+                                class="font-semibold">{{ Number::currency($ultimate_grand_total, 'IDR', 'id') }}</span>
                         @else
                             <span class="font-semibold">{{ Number::currency(0, 'IDR', 'id') }}</span>
                         @endif
