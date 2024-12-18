@@ -3,6 +3,8 @@
 namespace App\Livewire;
 
 use App\Helpers\DatabaseCartManagement;
+use App\Models\User;
+use Auth;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Request;
@@ -17,10 +19,12 @@ class CheckoutPage extends Component
     public $tax_cost;
     public $shipping_cost;
     public $ultimate_grand_total;
+    public $shipping_method;
     public $first_name;
     public $last_name;
     public $phone_number;
     public $street_address;
+    public $address_line_2;
     public $city;
     public $state;
     public $zip_code;
@@ -28,10 +32,11 @@ class CheckoutPage extends Component
 
     public function mount(Request $request)
     {
+        $user = User::find(Auth::id());
+        $shipping_information = $user->shipping_information()->first();
+        $selected_cart_items = $request::query('selected_cart_items');
         $this->tax_percentage = config('checkout.tax_percentage');
         $this->shipping_cost = config('checkout.shipping_cost');
-        $selected_cart_items = $request::query('selected_cart_items');
-
         // If it exists, decode and process the items
         if ($selected_cart_items) {
             $this->selected_cart_items = json_decode($selected_cart_items, true);
@@ -45,6 +50,16 @@ class CheckoutPage extends Component
         }
         $this->tax_cost = $this->grand_total * $this->tax_percentage;
         $this->ultimate_grand_total = $this->calculateUltimateGrandTotal();
+        $this->first_name = $user->first_name ?? "";
+        $this->last_name = $user->last_name ?? "";
+        $this->phone_number = $user->phone_number ?? "";
+        if ($shipping_information) {
+            $this->street_address = $shipping_information->street_address ?? "";
+            $this->address_line_2 = $shipping_information->address_line_2 ?? "";
+            $this->city = $shipping_information->city_or_regency ?? "";
+            $this->state = $shipping_information->state ?? "";
+            $this->zip_code = $shipping_information->zip_code ?? "";
+        }
     }
 
     public function placeOrder() {

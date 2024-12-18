@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('transaction_id');
             $table->foreignId('order_id')->constrained('orders', 'id')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('order_name');
+            $table->json('order_cart_items');
             $table->string('status');
             $table->decimal('final_price', 15, 2);
-            $table->string('customer_first_name')->nullable();
+            $table->string('customer_first_name');
             $table->string('customer_last_name')->nullable();
             $table->string('customer_email');
             $table->string('checkout_link');

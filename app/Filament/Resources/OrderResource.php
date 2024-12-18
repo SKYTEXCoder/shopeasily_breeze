@@ -116,18 +116,9 @@ class OrderResource extends Resource
 
                             Select::make('shipping_method')
                                 ->options([
-                                    'fedex' => 'FedEx',
-                                    'ups' => 'UPS',
-                                    'dhl' => 'DHL',
-                                    'usps' => 'USPS',
                                     'jne' => 'JNE',
-                                    'jnt' => 'J&T Express',
-                                    'anteraja' => 'AnterAja',
-                                    'sicepat' => 'SiCepat',
-                                    'ninja' => 'Ninja Xpress',
-                                    'lion_parcel' => 'Lion Parcel',
-                                    'gosend' => 'Go-Send',
-                                    'grabexpress' => 'Grab Express',
+                                    'pos_indonesia' => 'POS Indonesia',
+                                    'tiki' => 'TIKI',
                                 ]),
 
                             Textarea::make('notes')
