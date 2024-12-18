@@ -37,10 +37,10 @@ class ProductsPage extends Component
     public $in_stock;
 
     #[Url]
-    public $price_range;
+    public $price_range = 0;
 
     #[Url]
-    public $max_price_of_queried_products;
+    public $max_price_of_queried_products = 0;
 
     #[Url]
     public $sort = 'latest';
@@ -70,7 +70,7 @@ class ProductsPage extends Component
     }
 
     public function mount() {
-        $this->price_range = Product::query()->where('is_active', 1)->max('final_price');
+        $this->price_range = Product::query()->where('is_active', 1)->max('final_price') ?? 0;
         $this->max_price_of_queried_products = $this->price_range;
     }
 
