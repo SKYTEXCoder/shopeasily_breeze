@@ -1,6 +1,6 @@
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
     <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-        Check Out
+        Check Out Your Shopping Cart
     </h1>
     <form wire:submit.prevent='placeOrder'>
         <div class="grid grid-cols-12 gap-4">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="mt-4">
                             <label class="block text-gray-700 dark:text-white mb-1" for="address">
-                                Street Address
+                                Street Address / Address Line 1
                             </label>
                             <input wire:model.live='street_address'
                                 class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('street_address') border-red-600 @enderror"
@@ -63,8 +63,20 @@
                             @enderror
                         </div>
                         <div class="mt-4">
+                            <label class="block text-gray-700 dark:text-white mb-1" for="address_line_2">
+                                Address Line 2
+                            </label>
+                            <input wire:model.live='address_line_2'
+                                class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('address_line_2') border-red-600 @enderror"
+                                id="address_line_2" type="text">
+                            </input>
+                            @error('address_line_2')
+                                <div class="text-red-500 text-sm">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mt-4">
                             <label class="block text-gray-700 dark:text-white mb-1" for="city">
-                                City
+                                City or Regency
                             </label>
                             <input wire:model.live='city'
                                 class="w-full rounded-lg border py-2 px-3 dark:bg-gray-700 dark:text-white dark:border-none @error('city') border-red-600 @enderror"
@@ -153,6 +165,73 @@
                                 <div class="block">
                                     <div class="w-full text-lg font-semibold">
                                         Stripe
+                                    </div>
+                                </div>
+                                <svg aria-hidden="true" class="w-5 h-5 ms-3 rtl:rotate-180" fill="none"
+                                    viewbox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2">
+                                    </path>
+                                </svg>
+                            </label>
+                            </input>
+                        </li>
+                    </ul>
+                    @error('payment_method')
+                        <div class="text-red-500 text-sm">{{ $message }}</div>
+                    @enderror
+                    <div class="text-lg font-semibold mt-4 mb-5">
+                        Select Shipping Method / Courier
+                    </div>
+                    <ul class="grid w-full gap-6 md:grid-cols-2">
+                        <li>
+                            <input wire:model.live='shipping_method' class="hidden peer" id="hosting-jne"
+                                required="" type="radio" value="jne" />
+                            <label
+                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                for="hosting-jne">
+                                <div class="block">
+                                    <div class="w-full text-lg font-semibold">
+                                        JNE
+                                    </div>
+                                </div>
+                                <svg aria-hidden="true" class="w-5 h-5 ms-3 rtl:rotate-180" fill="none"
+                                    viewbox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2">
+                                    </path>
+                                </svg>
+                            </label>
+                        </li>
+                        <li>
+                            <input wire:model.live='shipping_method' class="hidden peer" id="hosting-pos-indonesia"
+                                required="" type="radio" value="pos_indonesia">
+                            <label
+                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                for="hosting-pos-indonesia">
+                                <div class="block">
+                                    <div class="w-full text-lg font-semibold">
+                                        POS Indonesia
+                                    </div>
+                                </div>
+                                <svg aria-hidden="true" class="w-5 h-5 ms-3 rtl:rotate-180" fill="none"
+                                    viewbox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 5h12m0 0L9 1m4 4L9 9" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2">
+                                    </path>
+                                </svg>
+                            </label>
+                            </input>
+                        </li>
+                        <li>
+                            <input wire:model.live='shipping_method' class="hidden peer" id="hosting-tiki"
+                                required="" type="radio" value="tiki">
+                            <label
+                                class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                for="hosting-tiki">
+                                <div class="block">
+                                    <div class="w-full text-lg font-semibold">
+                                        TIKI
                                     </div>
                                 </div>
                                 <svg aria-hidden="true" class="w-5 h-5 ms-3 rtl:rotate-180" fill="none"

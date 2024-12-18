@@ -16,7 +16,7 @@ new class extends Component {
     public string $email = '';
     public ?string $first_name = '';
     public ?string $last_name = '';
-    public ?string $phone_number = '';
+    public ?string $phone_number = null;
     public ?UploadedFile $image = null;
     public ?string $imageUrl = null;
 
@@ -60,11 +60,15 @@ new class extends Component {
             $validated['image'] = $path;
         }
 
-        $user->fill($validated);
+        if (empty($this->phone_number)) {
+            $validated['phone_number'] = null;
+        }
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
         }
+
+        $user->fill($validated);
 
         $user->save();
 
@@ -96,7 +100,13 @@ new class extends Component {
             <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Picture"
                 class="w-16 h-16 rounded-full object-cover" />
         @else
-            <div class="w-16 h-16 bg-gray-300 rounded-full"></div>
+            <div class="relative w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center z-10">
+                <svg class="w-full h-full text-gray-400 -z-10" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
+                    </path>
+                </svg>
+            </div>
         @endif
 
         <div>

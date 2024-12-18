@@ -92,6 +92,10 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         return $this->hasMany(Cart::class);
     }
 
+    public function shipping_information() {
+        return $this->hasOne(ShippingInformation::class);
+    }
+
     public function getFullNameAttribute() {
         return "{$this->first_name} {$this->last_name}";
     }
