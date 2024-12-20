@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MidtransPaymentController;
 use App\Livewire\BrandsPage;
 use App\Livewire\CancelPage;
 use App\Livewire\CartPage;
@@ -42,10 +43,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', CheckoutPage::class);
     Route::get('/my-orders', MyOrdersPage::class);
     Route::get('/my-orders/{order}', MyOrderDetailPage::class);
-    Route::get('/success', SuccessPage::class);
-    Route::get('/cancelled', CancelPage::class);
+    Route::get('/payment-success', SuccessPage::class)->name('success');
+    Route::get('/payment-cancelled', CancelPage::class)->name('cancelled');
 });
 
 Route::get('/search', ProductsPage::class)->name('search');
+
+Route::post('/payments/midtrans', [MidtransPaymentController::class, 'create'])->name('web.payments.midtrans.create');
 
 require __DIR__.'/auth.php';

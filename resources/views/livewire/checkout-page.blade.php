@@ -244,7 +244,7 @@
                             </input>
                         </li>
                     </ul>
-                    @error('payment_method')
+                    @error('shipping_method')
                         <div class="text-red-500 text-sm">{{ $message }}</div>
                     @enderror
                 </div>
@@ -327,5 +327,13 @@
             </div>
         </div>
     </form>
+
+    @script
+    <script>
+        $wire.on('redirectToMidtransPaymentUrl', (url) => {
+            window.location.href = url
+        })
+    </script>
+    @endscript
 
 </div>
