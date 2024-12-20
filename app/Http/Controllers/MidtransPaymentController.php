@@ -15,7 +15,7 @@ class MidtransPaymentController extends Controller
         $midtrans_items_details = [];
         $gross_amount = 0;
         foreach ($request->checkout_cart_items as $checkout_cart_item) {
-            $gross_amount = intval($gross_amount + intval($checkout_cart_item['total_amount']));
+            $gross_amount = intval(intval($gross_amount) + intval($checkout_cart_item['total_amount']));
             $midtrans_items_details[] = [
                 'id' => $checkout_cart_item['product_id'],
                 'price' => intval($checkout_cart_item['total_amount']),
@@ -29,14 +29,14 @@ class MidtransPaymentController extends Controller
             'quantity' => 1,
             'name' => 'Shipping Costs',
         ];
-        $gross_amount = intval($gross_amount + intval($request->shipping_cost));
+        $gross_amount = intval(intval($gross_amount) + intval($request->shipping_cost));
         $midtrans_items_details[] = [
             'id' => 'tax_' . Str::uuid(),
             'price' => intval($request->tax_cost),
             'quantity' => 1,
             'name' => 'Tax Costs (1% of Subtotal)'
         ];
-        $gross_amount = intval($gross_amount + intval($request->tax_cost));
+        $gross_amount = intval(intval($gross_amount) + intval($request->tax_cost));
         $parameters = array(
             'transaction_details' => array(
                 'order_id' => Str::uuid(),
@@ -82,10 +82,17 @@ class MidtransPaymentController extends Controller
             'Authorization' => 'Basic ' . $auth,
             'Content-Type' => 'application/json',
         ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions', $parameters);
-        $response = json_decode($response->body(), true);
+        if ($response->failed()) {
+            $errorMessage = $response->body() ?: 'Failed to connect to the Midtrans Payment Gateway Snap API';
+            return response()->json([
+                'success' => false,
+                'message' => $errorMessage,
+            ], $response->status());
+        }
+        $response = $response->json();
         $payment = new Payment();
         $payment->transaction_id = $parameters['transaction_details']['order_id'];
-        $payment->order_id = $request->order_id;
+        $payment->order_id = null;
         $payment->order_cart_items = json_encode($midtrans_items_details);
         $payment->status = 'pending';
         $payment->final_price = $parameters['transaction_details']['gross_amount'];
@@ -95,7 +102,13 @@ class MidtransPaymentController extends Controller
         $payment->checkout_link = $response['redirect_url'];
         $payment->snap_token = $response['token'];
         $payment->save();
-        return response(json_encode($response), 200);
+        return response()->json([
+            'success' => true,
+            'message' => 'Successfully obtained redirect_url and snap_token from Midtrans API',
+            'redirect_url' => $response["redirect_url"],
+            'snap_token' => $response["token"],
+            'midtrans_payment_id' => $payment->id,
+        ]);
     }
 
     public function webhook(Request $request)

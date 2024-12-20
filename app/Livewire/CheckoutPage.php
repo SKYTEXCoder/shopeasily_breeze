@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Helpers\DatabaseCartManagement;
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\User;
 use Auth;
 use Livewire\Component;
@@ -80,8 +81,47 @@ class CheckoutPage extends Component
             'shipping_method' => 'required',
         ]);
 
+        $payment_id = null;
         $stripe_line_items = [];
         $redirect_url = '';
+
+        if ($this->payment_method == 'midtrans') {
+            $request = Request::create(route('api.payments.midtrans.create'), 'POST', [
+                'checkout_cart_items' => $this->cart_items,
+                'shipping_cost' => $this->shipping_cost,
+                'tax_cost' => $this->tax_cost,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email_address' => auth()->user()->email,
+                'phone_number' => $this->phone_number,
+                'street_address' => $this->street_address,
+                'city' => $this->city,
+                'zip_code' => $this->zip_code,
+            ]);
+            $response = app()->handle($request);
+            if ($response->isSuccessful()) {
+                $responseData = json_decode($response->getContent(), true);
+                $redirect_url = $responseData['redirect_url'];
+                $payment_id = $responseData['midtrans_payment_id'];
+            }
+            else {
+                $responseData = json_decode($response->getContent(), true);
+                session()->flash('error', $responseData['message']);
+                return;
+            }
+        }
+        elseif ($this->payment_method == 'stripe') {
+
+        }
+        elseif ($this->payment_method == 'paypal') {
+
+        }
+        elseif ($this->payment_method == 'doku') {
+
+        }
+        else {
+            $redirect_url = route('success');
+        }
 
         $order = new Order();
         $order->user_id = Auth::id();
@@ -94,6 +134,7 @@ class CheckoutPage extends Component
         $order->shipping_method = $this->shipping_method;
         $order->notes = 'An order placed by ' . auth()->user()->name;
         $order->save();
+
         $order->products()->createMany($this->cart_items->map(function ($cart_item) use ($order) {
             return [
                 'product_id' => $cart_item->product_id,
@@ -116,46 +157,10 @@ class CheckoutPage extends Component
         $address->zip_code = $this->zip_code;
         $address->save();
 
-        if ($this->payment_method == 'midtrans') {
-            $request = Request::create(route('api.payments.midtrans.create'), 'POST', [
-                'checkout_cart_items' => $this->cart_items,
-                'shipping_cost' => $this->shipping_cost,
-                'tax_cost' => $this->tax_cost,
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
-                'email_address' => auth()->user()->email,
-                'phone_number' => $this->phone_number,
-                'street_address' => $this->street_address,
-                'city' => $this->city,
-                'zip_code' => $this->zip_code,
-                'order_id' => $order->id,
-            ]);
-            $response = app()->handle($request);
-            if ($response->isSuccessful()) {
-                $responseData = json_decode($response->getContent(), true);
-                $redirect_url = $responseData['redirect_url'];
-                DatabaseCartManagement::clearCartItems($this->selected_cart_items);
-                $this->dispatch('redirectToMidtransPaymentUrl', $redirect_url);
-            }
-            else {
-                session()->flash('error', 'The MidTrans Payment Gateway is not available or reachable at this moment. Please try again later.');
-                return;
-            }
-        }
-        elseif ($this->payment_method == 'stripe') {
+        Payment::where('id', $payment_id)->update(['order_id' => $order->id]);
 
-        }
-        elseif ($this->payment_method == 'paypal') {
-
-        }
-        elseif ($this->payment_method == 'doku') {
-
-        }
-        else {
-            $redirect_url = route('success');
-            DatabaseCartManagement::clearCartItems($this->selected_cart_items);
-            return redirect($redirect_url);
-        }
+        DatabaseCartManagement::clearCartItems($this->selected_cart_items);
+        $this->dispatch('redirectToPaymentUrl', $redirect_url);
     }
 
     public function calculateUltimateGrandTotal() {

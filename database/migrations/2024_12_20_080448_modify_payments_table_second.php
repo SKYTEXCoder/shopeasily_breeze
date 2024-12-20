@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('carts', function (Blueprint $table) {
-            $table->string('slug')->nullable()->after('image');
+        Schema::table('payments', function (Blueprint $table) {
+            $table->foreignId('order_id')->nullable(true)->change();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('carts', function (Blueprint $table) {
-            $table->dropColumn('slug');
+        Schema::table('payments', function (Blueprint $table) {
+            $table->foreignId('order_id')->nullable(false)->change();
         });
     }
 };
