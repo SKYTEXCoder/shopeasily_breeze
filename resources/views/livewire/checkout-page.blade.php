@@ -330,7 +330,7 @@
 
     @script
     <script>
-        $wire.on('redirectToMidtransPaymentUrl', (url) => {
+        $wire.on('redirectToPaymentUrl', (url) => {
             window.location.href = url
         })
     </script>

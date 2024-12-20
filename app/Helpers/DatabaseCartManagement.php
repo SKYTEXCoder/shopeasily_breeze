@@ -148,7 +148,7 @@ class DatabaseCartManagement
 
     static public function clearCartItems($selected_cart_items = [])
     {
-        Cart::whereUserId(Auth::id())->delete();
+        Cart::whereUserId(Auth::id())->whereIn('product_id', $selected_cart_items)->delete();
     }
 
     static public function getCartItemsFromDatabase($selected_cart_items = [], $columns = ['*'])
