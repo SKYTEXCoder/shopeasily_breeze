@@ -16,7 +16,7 @@
                                         </div>
                                     </th>
                                     <th class="text-center font-semibold">Product Name</th>
-                                    <th class="text-center font-semibold">Price</th>
+                                    <th class="text-center font-semibold">Unit Price</th>
                                     <th class="text-center font-semibold">Quantity</th>
                                     <th class="text-center font-semibold">Total Price</th>
                                     <th class="text-center font-semibold">
