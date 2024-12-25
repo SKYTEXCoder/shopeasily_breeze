@@ -156,7 +156,7 @@
                             </label>
                             </input>
                         </li>
-                        <li>
+                        <!-- <li>
                             <input wire:model.live='payment_method' class="hidden peer" id="hosting-stripe"
                                 required="" type="radio" value="stripe">
                             <label
@@ -175,7 +175,7 @@
                                 </svg>
                             </label>
                             </input>
-                        </li>
+                        </li> -->
                     </ul>
                     @error('payment_method')
                         <div class="text-red-500 text-sm">{{ $message }}</div>
@@ -292,7 +292,8 @@
                 </div>
                 <button type="submit"
                     class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
-                    Place Order
+                    <span wire:loading.remove>Place Order</span>
+                    <span wire:loading>Processing...</span>
                 </button>
                 <div class="bg-white mt-4 rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
                     <div class="text-xl font-bold underline text-gray-700 dark:text-white mb-2">

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Helpers\DatabaseCartManagement;
+use App\Mail\OrderPlaced;
 use App\Models\Address;
 use App\Models\Order;
 use App\Models\Payment;
@@ -11,6 +12,7 @@ use Auth;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Request;
+use Mail;
 use Redirect;
 use Str;
 
@@ -90,6 +92,8 @@ class CheckoutPage extends Component
                 'checkout_cart_items' => $this->cart_items,
                 'shipping_cost' => $this->shipping_cost,
                 'tax_cost' => $this->tax_cost,
+                'grand_total' => $this->grand_total,
+                'ultimate_grand_total' => $this->ultimate_grand_total,
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'email_address' => auth()->user()->email,
@@ -110,15 +114,6 @@ class CheckoutPage extends Component
                 return;
             }
         }
-        elseif ($this->payment_method == 'stripe') {
-
-        }
-        elseif ($this->payment_method == 'paypal') {
-
-        }
-        elseif ($this->payment_method == 'doku') {
-
-        }
         else {
             $redirect_url = route('success');
         }
@@ -131,6 +126,7 @@ class CheckoutPage extends Component
         $order->status = 'new';
         $order->currency = 'idr';
         $order->shipping_amount = $this->shipping_cost;
+        $order->tax_amount = $this->tax_cost;
         $order->shipping_method = $this->shipping_method;
         $order->notes = 'An order placed by ' . auth()->user()->name;
         $order->save();
@@ -160,6 +156,7 @@ class CheckoutPage extends Component
         Payment::where('id', $payment_id)->update(['order_id' => $order->id]);
 
         DatabaseCartManagement::clearCartItems($this->selected_cart_items);
+        Mail::to(request()->user())->send(new OrderPlaced($order));
         $this->dispatch('redirectToPaymentUrl', $redirect_url);
     }
 
