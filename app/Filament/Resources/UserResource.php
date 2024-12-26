@@ -60,8 +60,10 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make(),
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\EditAction::make()
+                        ->visible(fn (User $record) => $record->is_admin != 1),
+                    Tables\Actions\DeleteAction::make()
+                        ->visible(fn (User $record) => $record->is_admin != 1),
                 ])
             ])
             ->bulkActions([
@@ -97,5 +99,13 @@ class UserResource extends Resource
 
     public static function getGloballySearchableAttributes(): array {
         return ['id', 'name', 'email'];
+    }
+
+    public static function getEloquentQuery(): Builder {
+        return parent::getEloquentQuery()->where('is_admin', '!=', '1');
+    }
+
+    public static function shouldRegisterNavigation(): bool {
+        return auth()->user()?->is_admin == 1;
     }
 }
