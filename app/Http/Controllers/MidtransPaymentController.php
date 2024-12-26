@@ -120,7 +120,7 @@ class MidtransPaymentController extends Controller
         if (boolval(config('midtrans.is_production')) === true) {
             $validSignatureKey = hash("sha512", $notification->order_id . $notification->status_code . $notification->gross_amount . config('midtrans.server_key'));
             if ($notification->signature_key !== $validSignatureKey) {
-                return response(['code' => 403, 'message' => 'Invalid Signaure Key'], 403);
+                return response(['code' => 403, 'message' => 'Invalid Signature Key'], 403);
             }
         }
         $auth = base64_encode(config('midtrans.server_key'));
@@ -138,14 +138,14 @@ class MidtransPaymentController extends Controller
         $payment = Payment::where('transaction_id', $response->order_id)->firstOrFail();
         $order = Order::where('id', $payment->order_id)->first();
         if (!$order) {
-            return response(['code' => '404', 'message' => 'Order Not Found', 404]);
+            return response(['code' => '404', 'message' => 'Order Not Found'], 404);
         }
-        if ($order->payment_status == 'paid' && $order->status == 'processing') {
-            return response(['code' => '403', 'message' => 'Order Is Already Paid & Being Processed', 403]);
+        if ($order->payment_status === 'paid' && $order->status === 'processing') {
+            return response(['code' => '200', 'message' => 'Order Is Already Paid & Being Processed'], 200);
         }
         $paymentSuccess = false;
         if ($payment->status === 'settlement' || $payment->status === 'capture') {
-            return response()->json('Payment has already been processed');
+            return response(['code' => '200', 'message' => 'Payment has already been processed'], 200);
         }
         if ($response->transaction_status === 'capture') {
             if ($response->payment_type == 'credit_card') {
@@ -156,6 +156,7 @@ class MidtransPaymentController extends Controller
                 }
             }
             $payment->status = 'capture';
+            $paymentSuccess = true;
         } else if ($response->transaction_status === 'settlement') {
             $payment->status = 'settlement';
             $paymentSuccess = true;
@@ -170,6 +171,9 @@ class MidtransPaymentController extends Controller
             $paymentSuccess = false;
         } else if ($response->transaction_status === 'cancel') {
             $payment->status = 'cancel';
+            $paymentSuccess = false;
+        } else if ($response->transaction_status === 'failure') {
+            $payment->status = 'failure';
             $paymentSuccess = false;
         }
         $payment->save();
@@ -194,7 +198,9 @@ class MidtransPaymentController extends Controller
                     $order->payment_status = 'cancelled';
                     $order->save();
                 } else {
-                    //
+                    $order->status = 'new';
+                    $order->payment_status = 'pending';
+                    $order->save();
                 }
             } catch (\Exception $exception) {
                 DB::rollBack();
