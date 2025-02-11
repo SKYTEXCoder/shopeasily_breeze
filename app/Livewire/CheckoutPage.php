@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Helpers\DatabaseCartManagement;
+use App\Helpers\DatabaseCartHelper;
 use App\Mail\OrderPlaced;
 use App\Models\Address;
 use App\Models\Order;
@@ -51,8 +51,8 @@ class CheckoutPage extends Component
                 $this->selected_cart_items = [];
             } else {
                 $this->selected_cart_items = array_map('intval', $this->selected_cart_items); // Ensure items are integers
-                $this->cart_items = DatabaseCartManagement::getCartItemsFromDatabase($this->selected_cart_items, columns: ['id', 'product_id', 'name', 'image', 'quantity', 'unit_amount', 'total_amount']);
-                $this->grand_total = DatabaseCartManagement::calculateGrandTotal($this->selected_cart_items);
+                $this->cart_items = DatabaseCartHelper::getCartItemsFromDatabase($this->selected_cart_items, columns: ['id', 'product_id', 'name', 'image', 'quantity', 'unit_amount', 'total_amount']);
+                $this->grand_total = DatabaseCartHelper::calculateGrandTotal($this->selected_cart_items);
             }
         }
         $this->tax_cost = $this->grand_total * $this->tax_percentage;
@@ -155,7 +155,7 @@ class CheckoutPage extends Component
 
         Payment::where('id', $payment_id)->update(['order_id' => $order->id]);
 
-        DatabaseCartManagement::clearCartItems($this->selected_cart_items);
+        DatabaseCartHelper::clearCartItems($this->selected_cart_items);
         Mail::to(request()->user())->send(new OrderPlaced($order));
         $this->dispatch('redirectToPaymentUrl', $redirect_url);
     }
