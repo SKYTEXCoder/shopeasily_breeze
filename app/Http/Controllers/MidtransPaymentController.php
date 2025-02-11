@@ -17,32 +17,32 @@ class MidtransPaymentController extends Controller
         $midtrans_items_details = [];
         $gross_amount = 0;
         foreach ($request->checkout_cart_items as $checkout_cart_item) {
-            $gross_amount = intval(intval($gross_amount) + intval($checkout_cart_item['total_amount']));
+            $gross_amount += $checkout_cart_item['total_amount'];
             $midtrans_items_details[] = [
                 'id' => $checkout_cart_item['product_id'],
-                'price' => intval($checkout_cart_item['unit_amount']),
-                'quantity' => intval($checkout_cart_item['quantity']),
+                'price' => ($checkout_cart_item['unit_amount']),
+                'quantity' => ($checkout_cart_item['quantity']),
                 'name' => Str::limit($checkout_cart_item['name'], 40, '...'),
             ];
         }
         $midtrans_items_details[] = [
             'id' => 'shipping_' . Str::uuid(),
-            'price' => intval($request->shipping_cost),
+            'price' => ($request->shipping_cost),
             'quantity' => 1,
             'name' => 'Shipping Costs',
         ];
-        $gross_amount = intval(intval($gross_amount) + intval($request->shipping_cost));
+        $gross_amount += $request->shipping_cost;
         $midtrans_items_details[] = [
             'id' => 'tax_' . Str::uuid(),
-            'price' => intval($request->tax_cost),
+            'price' => ($request->tax_cost),
             'quantity' => 1,
             'name' => 'Tax Costs (1% of Subtotal)'
         ];
-        $gross_amount = intval(intval($gross_amount) + intval($request->tax_cost));
+        $gross_amount += $request->tax_cost;
         $parameters = array(
             'transaction_details' => array(
                 'order_id' => Str::uuid(),
-                'gross_amount' => intval($gross_amount),
+                'gross_amount' => ($gross_amount),
             ),
             'item_details' => $midtrans_items_details,
             'customer_details' => array(
