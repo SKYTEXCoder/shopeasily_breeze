@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Partials;
 
-use App\Helpers\CookieCartManagement;
-use App\Helpers\DatabaseCartManagement;
+use App\Helpers\CookieCartHelper;
+use App\Helpers\DatabaseCartHelper;
 use App\Models\Category;
 use Auth;
 use Livewire\Component;
@@ -15,9 +15,9 @@ class Navbar extends Component
     public $total_count = 0;
 
     public function mount() {
-        $this->total_count = Auth::check() ? array_reduce(DatabaseCartManagement::getCartItemsFromDatabase(columns: ['quantity'])->toArray(), function($carry, $item) {
+        $this->total_count = Auth::check() ? array_reduce(DatabaseCartHelper::getCartItemsFromDatabase(columns: ['quantity'])->toArray(), function($carry, $item) {
             return $carry + $item['quantity'];
-        }, 0) : array_reduce(CookieCartManagement::getCartItemsFromCookie(), function($carry, $item) {
+        }, 0) : array_reduce(CookieCartHelper::getCartItemsFromCookie(), function($carry, $item) {
             return $carry + $item['quantity'];
         }, 0);
     }
