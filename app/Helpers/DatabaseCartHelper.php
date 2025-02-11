@@ -2,12 +2,12 @@
 
 namespace App\Helpers;
 
-use App\Models\Cart;
-use App\Models\Product;
 use Auth;
 use DB;
+use App\Models\Cart;
+use App\Models\Product;
 
-class DatabaseCartManagement
+class DatabaseCartHelper
 {
     static public function addItemToCart($product_id)
     {
@@ -204,7 +204,7 @@ class DatabaseCartManagement
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $cart_items_from_cookie = CookieCartManagement::getCartItemsFromCookie();
+            $cart_items_from_cookie = CookieCartHelper::getCartItemsFromCookie();
             $cart_items_from_database = self::getCartItemsFromDatabase();
             foreach ($cart_items_from_cookie as $cart_item_from_cookie) {
                 $existing_database_item = $cart_items_from_database->firstWhere('product_id', $cart_item_from_cookie['product_id']);
@@ -228,7 +228,7 @@ class DatabaseCartManagement
                     }
                 }
             }
-            CookieCartManagement::clearCartItems();
+            CookieCartHelper::clearCartItems();
         }
     }
 }

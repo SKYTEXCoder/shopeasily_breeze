@@ -2,8 +2,8 @@
 
 namespace App\Livewire;
 
-use App\Helpers\CookieCartManagement;
-use App\Helpers\DatabaseCartManagement;
+use App\Helpers\CookieCartHelper;
+use App\Helpers\DatabaseCartHelper;
 use App\Livewire\Partials\Navbar;
 use App\Models\Product;
 use Auth;
@@ -48,7 +48,7 @@ class ProductDetailPage extends Component
             return;
         }
 
-        $total_count = Auth::check() ? DatabaseCartManagement::addItemToCartWithExistingQty($product_id, $this->quantity) : CookieCartManagement::addItemToCartWithExistingQty($product_id, $this->quantity);
+        $total_count = Auth::check() ? DatabaseCartHelper::addItemToCartWithExistingQty($product_id, $this->quantity) : CookieCartHelper::addItemToCartWithExistingQty($product_id, $this->quantity);
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
 
