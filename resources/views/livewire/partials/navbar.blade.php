@@ -53,25 +53,25 @@
                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdown-button">
-                                        <li>
+                                        <li wire:key="0">
                                             <button type="button"
                                                 class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                data-js="category-option">All Categories</button>
+                                                data-js="category-option" value="0">All Categories</button>
                                         </li>
                                         @foreach ($categories as $category)
                                             <li wire:key="{{ $category->id }}">
                                                 <button type="button"
                                                     class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                                    data-js="category-option">{{ $category->name }}</button>
+                                                    data-js="category-option" value="{{ $category->id }}">{{ $category->name }}</button>
                                             </li>
                                         @endforeach
                                     </ul>
                                 </div>
                                 <div class="relative w-full md:w-[200px] lg:w-[300px]">
-                                    <input type="search" id="search-dropdown"
+                                    <input type="search" id="search-dropdown" name="searchQuery"
                                         class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                        placeholder="What products are you looking for?" required />
-                                    <input type="hidden" id="category" name="category" value="">
+                                        placeholder="What kind of products are you looking for?" value="" required />
+                                    <input type="hidden" id="productCategory" name="productCategory" value="0">
                                     <button type="submit"
                                         class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

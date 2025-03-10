@@ -4,7 +4,7 @@ export function initializeCategorySearchBoxDropdown() {
     const dropdownArrowPath = document.getElementById("dropdown-arrow-path");
     const options = document.querySelectorAll('[data-js="category-option"]');
     const searchInputField = document.getElementById("search-dropdown");
-    const categoryInputField = document.getElementById("category");
+    const categoryInputField = document.getElementById("productCategory");
     const observer = new MutationObserver((mutationsList, observer) => {
         mutationsList.forEach((mutation) => {
             if (
@@ -27,12 +27,12 @@ export function initializeCategorySearchBoxDropdown() {
             dropdownButton.childNodes[0].textContent = option.innerText;
             if (option.innerHTML === "All Categories") {
                 searchInputField.placeholder =
-                    "What products are you looking for?";
-                categoryInputField.value = "";
+                    "What kind of products are you looking for?";
+                categoryInputField.value = "0";
             } else {
                 searchInputField.placeholder =
-                    "Search for " + option.innerHTML.toLowerCase() + ".....";
-                categoryInputField.value = ""; //TODO: change this
+                    "Search for " + option.innerHTML.toLowerCase() + " products.....";
+                categoryInputField.value = option.value; //TODO: change this
             }
             dropdown.classList.toggle("hidden");
         });
