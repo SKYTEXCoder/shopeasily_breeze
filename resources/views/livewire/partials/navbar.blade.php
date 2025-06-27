@@ -4,8 +4,11 @@
         <div class="relative md:flex md:items-center md:justify-between">
             <div class="flex items-center justify-between">
                 <a wire:navigate
-                    class="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                    href="{{ url('/') }}" aria-label="Brand">TechGear™</a>
+                    class="flex items-center gap-x-2 text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                    href="{{ url('/') }}" aria-label="Brand">
+                    <img src="{{ asset('branding/techgear/techgear_logo_dark.png') }}" class="h-8 w-8" alt="TechGear™ Logo">
+                    <span>TechGear™</span>
+                </a>
                 <div class="md:hidden">
                     <button type="button"
                         class="hs-collapse-toggle flex justify-center items-center w-9 h-9 text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -34,9 +37,8 @@
                 <div
                     class="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500">
                     <div
-                        class="flex flex-col gap-x-0 mt-5 divide-y divide-dashed divide-gray-200 md:flex-row md:items-center md:justify-end md:gap-x-7 md:mt-0 md:ps-7 md:divide-y-0 md:divide-solid dark:divide-gray-700">
-
-                        <form class="max-w-lg mx-auto" method="GET" action="{{ route('search') }}">
+                        class="flex flex-col gap-x-0 mt-5 divide-y divide-dashed divide-gray-200 md:flex-row md:items-center md:justify-between md:gap-x-4 md:mt-0 md:ps-8 lg:ps-10 md:divide-y-0 md:divide-solid dark:divide-gray-700">
+                        <form class="max-w-lg mx-auto md:mx-0 md:order-1" method="GET" action="{{ route('search') }}">
                             <div class="flex">
                                 <label for="search-dropdown"
                                     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your
@@ -67,7 +69,7 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                                <div class="relative w-full md:w-[200px] lg:w-[340px]">
+                                <div class="relative w-full md:w-[180px] lg:w-[255px] xl:w-[330px]">
                                     <input type="search" id="search-dropdown" name="searchQuery"
                                         class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                                         placeholder="What kind of products are you looking for?" value="" required />
@@ -85,32 +87,33 @@
                             </div>
                         </form>
 
-                        <a wire:navigate
-                            class="font-medium {{ request()->is('/') ? 'text-blue-600' : 'text-gray-500' }} py-3 md:py-6 dark:text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ url('/') }}" aria-current="page">Home</a>
+                        <div class="flex flex-col md:flex-row md:items-center md:gap-x-4 lg:gap-x-6 md:order-2">
+                            <a wire:navigate
+                                class="font-medium {{ request()->is('/') ? 'text-blue-600' : 'text-gray-500' }} py-3 md:py-6 dark:text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                href="{{ url('/') }}" aria-current="page">Home</a>
 
-                        <a wire:navigate
-                            class="font-medium {{ request()->is('brands') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ url('brands') }}">
-                            Brands
-                        </a>
+                            <a wire:navigate
+                                class="font-medium {{ request()->is('brands') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                href="{{ url('brands') }}">
+                                Brands
+                            </a>
 
-                        <a wire:navigate
-                            class="font-medium {{ request()->is('categories') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ url('categories') }}">
-                            Categories
-                        </a>
+                            <a wire:navigate
+                                class="font-medium {{ request()->is('categories') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                href="{{ url('categories') }}">
+                                Categories
+                            </a>
 
-                        <a wire:navigate
-                            class="font-medium {{ request()->is('products') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ url('products') }}">
-                            Products
-                        </a>
+                            <a wire:navigate
+                                class="font-medium {{ request()->is('products') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                href="{{ url('products') }}">
+                                Products
+                            </a>
 
-                        <a wire:navigate
-                            class="font-medium flex items-center {{ request()->is('cart') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="{{ url('cart') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            <a wire:navigate
+                                class="font-medium flex items-center {{ request()->is('cart') ? 'text-blue-600' : 'text-gray-500' }} hover:text-gray-400 py-3 md:py-6 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                href="{{ url('cart') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-5 h-5 mr-1">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
@@ -120,9 +123,9 @@
                         </a>
 
                         @guest
-                            <div class="pt-3 md:pt-0">
+                            <div class="flex flex-col md:flex-row gap-2 md:gap-1 lg:gap-2 pt-3 md:pt-0">
                                 <a wire:navigate
-                                    class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 whitespace-nowrap"
+                                    class="py-2 px-3 md:py-2 md:px-3 lg:py-2.5 lg:px-4 inline-flex items-center gap-x-1 lg:gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 whitespace-nowrap justify-center"
                                     href="{{ route('login') }}">
                                     <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -130,13 +133,12 @@
                                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                                         <circle cx="12" cy="7" r="4" />
                                     </svg>
-                                    <span>Log In</span>
+                                    <span class="hidden lg:inline">Log In</span>
+                                    <span class="lg:hidden">Login</span>
                                 </a>
-                            </div>
 
-                            <div class="pt-3 md:pt-0">
                                 <a wire:navigate
-                                    class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 whitespace-nowrap"
+                                    class="py-2 px-3 md:py-2 md:px-3 lg:py-2.5 lg:px-4 inline-flex items-center gap-x-1 lg:gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 whitespace-nowrap justify-center"
                                     href="{{ route('register') }}">
                                     <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -144,13 +146,14 @@
                                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                                         <circle cx="12" cy="7" r="4" />
                                     </svg>
-                                    Register
+                                    <span class="hidden lg:inline">Register</span>
+                                    <span class="lg:hidden">Sign Up</span>
                                 </a>
                             </div>
                         @endguest
 
-                        <div class="flex items-center gap-x-2">
-                            @auth
+                        @auth
+                            <div class="flex items-center gap-x-2">
                                 <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                                     @if ($profileImagePath != null)
                                         <img class="w-10 h-10 rounded-full" src="{{ url('storage', $profileImagePath) }}"
@@ -200,13 +203,13 @@
                                         </a>
                                     </div>
                                 </div>
-                            @endauth
-                        </div>
-
-
+                            </div>
+                        @endauth
                     </div>
                 </div>
             </div>
         </div>
+    </nav>
+</header>
     </nav>
 </header>
