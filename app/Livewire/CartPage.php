@@ -9,7 +9,7 @@ use Auth;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Your Cart Page - ShopEasily™')]
+#[Title('Your Cart Page - TechGear™')]
 class CartPage extends Component
 {
 

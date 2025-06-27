@@ -14,11 +14,6 @@ class WishlistsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('wishlists')->delete();
-        
-        
-        
     }
 }

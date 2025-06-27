@@ -15,7 +15,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Title('Products Page - ShopEasily™')]
+#[Title('Products Page - TechGear™')]
 class ProductsPage extends Component
 {
     use WithPagination;
@@ -122,6 +122,7 @@ class ProductsPage extends Component
             'brands' => Brand::where('is_active', 1)->get(['id', 'name', 'slug']),
             'categories' => Category::where('is_active', 1)->get(['id', 'name', 'slug']),
             'max_price_of_queried_products' => $this->max_price_of_queried_products,
+            'hasProducts' => $productQuery->exists(),
         ]);
     }
 }

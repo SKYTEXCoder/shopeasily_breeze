@@ -16,7 +16,7 @@ use Mail;
 use Redirect;
 use Str;
 
-#[Title('ShopEasily™ - Check Out Your Shopping Cart')]
+#[Title('TechGear™ - Check Out Your Shopping Cart')]
 class CheckoutPage extends Component
 {
     public $cart_items = [];

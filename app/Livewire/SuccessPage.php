@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
-#[Title('Your Order Confirmation Page - ShopEasily™')]
+#[Title('Your Order Confirmation Page - TechGear™')]
 class SuccessPage extends Component
 {
     #[Url]

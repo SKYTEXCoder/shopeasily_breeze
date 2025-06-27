@@ -3,7 +3,7 @@
       <!-- Grid -->
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
         <div class="col-span-full lg:col-span-1">
-          <a class="flex-none text-xl font-semibold text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#" aria-label="Brand">ShopEasily</a>
+          <a class="flex-none text-xl font-semibold text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#" aria-label="Brand">TechGear™ - Your Ultimate Tech Arsenal & Solution To PC Parts</a>
         </div>
         <!-- End Col -->
 
@@ -22,16 +22,15 @@
           <h4 class="font-semibold text-gray-100">Company</h4>
 
           <div class="mt-3 grid space-y-3">
-            <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">About us</a></p>
-            <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Blog</a></p>
-
-            <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Customers</a></p>
+            <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">About Us</a></p>
+            <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Frequently Asked Questions (FAQs)</a></p>
+            <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Contact Us</a></p>
           </div>
         </div>
         <!-- End Col -->
 
         <div class="col-span-2">
-          <h4 class="font-semibold text-gray-100">Stay up to date</h4>
+          <h4 class="font-semibold text-gray-100">Stay Up To Date</h4>
 
           <form>
             <div class="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-lg p-2 dark:bg-gray-800">
@@ -51,7 +50,7 @@
 
       <div class="mt-5 sm:mt-12 grid gap-y-2 sm:gap-y-0 sm:flex sm:justify-between sm:items-center">
         <div class="flex justify-between items-center">
-          <p class="text-sm text-gray-400">© {{ now()->year }} ShopEasily E-Commerce Team. All Rights Reserved To Their Respective Owners.</p>
+          <p class="text-sm text-gray-400">© {{ now()->year }} TechGear E-Commerce Website Development Team. All Rights Reserved To Their Respective Owners.</p>
         </div>
         <!-- End Col -->
 

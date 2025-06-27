@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-#[Title('My Orders Page - ShopEasily™')]
+#[Title('My Orders Page - TechGear™')]
 class MyOrdersPage extends Component
 {
     use WithPagination;
@@ -33,9 +33,11 @@ class MyOrdersPage extends Component
         $my_orders = Order::where('user_id', auth()->id())->latest()->paginate(5);
         return view('livewire.my-orders-page',
         ['orders'=> $my_orders,
-        'order_status_to_color_map' => $this->order_status_to_color,
-        'order_payment_status_to_color_map' => $this->order_payment_status_to_color,
-        'payment_methods_map' => $this->payment_methods_map]
+            'order_status_to_color_map' => $this->order_status_to_color,
+            'order_payment_status_to_color_map' => $this->order_payment_status_to_color,
+            'payment_methods_map' => $this->payment_methods_map,
+            'has_orders' => $my_orders->isNotEmpty()
+        ]
         );
     }
 }

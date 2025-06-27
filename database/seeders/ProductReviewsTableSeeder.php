@@ -14,11 +14,6 @@ class ProductReviewsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('product_reviews')->delete();
-        
-        
-        
     }
 }

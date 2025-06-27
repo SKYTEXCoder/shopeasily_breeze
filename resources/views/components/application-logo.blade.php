@@ -1,5 +1,5 @@
 <div class="z-20">
-    <img class="w-80 h-80" src="{{ asset('branding/shopeasily-whole.png') }}" alt="ShopEasily™ Whole Branding">
+    <img class="w-80 h-80" src="{{ asset('branding/techgear/techgear_logo.png') }}" alt="TechGear™ Whole Branding">
 </div>
 
 <!-- <svg viewBox="0 0 316 316" xmlns="http://www.w3.org/2000/svg" {{ $attributes }}>

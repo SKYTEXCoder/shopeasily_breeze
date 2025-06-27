@@ -107,7 +107,7 @@
                 <div class="bg-white rounded-lg shadow-md p-6 sticky top-[80px]">
                     <h2 class="text-lg font-semibold mb-4">Summary</h2>
                     <div class="flex justify-between mb-2">
-                        <span>Subtotal</span>
+                        <span>Sub Total</span>
                         <span>{{ Number::currency($grand_total, 'IDR', 'id') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
@@ -115,7 +115,7 @@
                         <span>{{ Number::currency($tax_cost, 'IDR', 'id') }}</span>
                     </div>
                     <div class="flex justify-between mb-2">
-                        <span>Shipping Cost</span>
+                        <span>Shipping Costs</span>
                         @if ($selected_cart_items)
                             <span>{{ Number::currency($shipping_cost, 'IDR', 'id') }}</span>
                         @else

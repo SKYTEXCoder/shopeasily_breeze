@@ -31,7 +31,7 @@ class OrderPlaced extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Placed - Thank You for Shopping with ShopEasily™!',
+            subject: 'Order Placed - Thank You for Shopping with TechGear™!',
         );
     }
 
