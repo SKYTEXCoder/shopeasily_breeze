@@ -2,12 +2,12 @@
     <!-- Logo + Name Section -->
     <div class="flex flex-grow items-center">
         <!-- Logo -->
-        <img src="{{ asset('branding/shopeasily-logo-big.png') }}" alt="ShopEasily™ Logo" class="h-11">
+        <img src="{{ asset('branding/techgear/techgearlogo.png') }}" alt="TechGear™ Logo" class="h-11">
 
         <!-- Blank Spacer PNG to add spacing (adding margin styles doesn't work for some reason) -->
-        <img src="{{ asset('branding/blank-spacer.png') }}" alt="" class="h-3">
+        <!-- <img src="{{ asset('branding/blank-spacer.png') }}" alt="" class="h-3"> -->
 
         <!-- Name -->
-        <img src="{{ asset('branding/shopeasily-name-big.png') }}" alt="ShopEasily™ Name" class="h-5">
+        <!-- <img src="{{ asset('branding/shopeasily-name-big.png') }}" alt="TechGear™ Name" class="h-5"> -->
     </div>
 </div>

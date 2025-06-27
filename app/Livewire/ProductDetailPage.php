@@ -11,7 +11,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
-#[Title('Product Details Page - ShopEasily™')]
+#[Title('Product Details Page - TechGear™')]
 class ProductDetailPage extends Component
 {
 

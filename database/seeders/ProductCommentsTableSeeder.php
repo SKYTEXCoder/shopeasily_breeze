@@ -14,11 +14,6 @@ class ProductCommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('product_comments')->delete();
-        
-        
-        
     }
 }
