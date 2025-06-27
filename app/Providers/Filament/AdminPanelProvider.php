@@ -67,8 +67,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->spa()
             ->brandLogo(fn () => view('filament.admin.logo'))
-            // ->brandLogoHeight('2rem')
-            ->favicon(asset('favicons/favicon.ico'))
+            ->darkModeBrandLogo(fn () => view('filament.admin.dark-logo'))
+            ->homeUrl('/')
+            ->favicon(asset(path: 'favicons/techgear/favicon-32x32.png'))
             ;
     }
 }
