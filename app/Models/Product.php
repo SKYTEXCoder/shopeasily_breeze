@@ -9,9 +9,34 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'brand_id', 'name', 'slug', 'images', 'description', 'original_price', 'final_price', 'discount_percentage', 'stock_amount', 'sold_amount', 'is_active', 'is_featured', 'in_stock', 'on_sale', 'rating'];
+    protected $fillable = [
+        'category_id',
+        'brand_id',
+        'name',
+        'slug',
+        'images',
+        'description',
+        'short_description',
+        'original_price',
+        'final_price',
+        'discount_percentage',
+        'stock_amount',
+        'sold_amount',
+        'is_active',
+        'is_featured',
+        'in_stock',
+        'on_sale',
+        'rating'
+    ];
 
-    protected $casts = ['images' => 'array'];
+    protected $casts = [
+        'images' => 'array',
+        'on_sale' => 'boolean',
+        'is_featured' => 'boolean',
+        'in_stock' => 'boolean',
+        'final_price' => 'decimal:2',
+        'original_price' => 'decimal:2',
+    ];
 
     protected static function booted()
     {
@@ -25,7 +50,7 @@ class Product extends Model
 
             if ($product->isDirty('name')) {
                 Cart::where('product_id', $product->id)->update([
-                   'name' => $product->name,
+                    'name' => $product->name,
                 ]);
             }
 
@@ -43,31 +68,38 @@ class Product extends Model
         });
     }
 
-    public function category() {
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function brand() {
+    public function brand()
+    {
         return $this->belongsTo(Brand::class);
     }
 
-    public function orderProducts() {
+    public function orderProducts()
+    {
         return $this->hasMany(OrderProduct::class);
     }
 
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany(ProductReview::class);
     }
 
-    public function wishlists() {
+    public function wishlists()
+    {
         return $this->belongsToMany(Wishlist::class, 'wishlist_product')->withPivot('priority', 'added_at', 'note')->withTimestamps();
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(ProductComment::class, 'product_id');
     }
 
-    public function cart() {
+    public function cart()
+    {
         return $this->hasMany(Cart::class);
     }
 }
