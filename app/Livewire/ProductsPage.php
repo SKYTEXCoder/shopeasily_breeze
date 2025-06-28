@@ -2,14 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Helpers\CookieCartHelper;
-use App\Helpers\DatabaseCartHelper;
-use App\Livewire\Partials\Navbar;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use Auth;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -19,7 +14,6 @@ use Livewire\WithPagination;
 class ProductsPage extends Component
 {
     use WithPagination;
-    use LivewireAlert;
 
     #[Url]
     public $selected_categories = [];
@@ -44,30 +38,6 @@ class ProductsPage extends Component
 
     #[Url]
     public $sort = 'latest';
-
-    public function addToCart($product_id){
-
-        $product = Product::find($product_id);
-
-        if (!$product) {
-            $this->alert('error', 'Product not found.', [
-                'position' => 'bottom-end',
-                'timer' => 3000,
-                'toast' => true,
-            ]);
-            return;
-        }
-
-        $total_count = Auth::check() ? DatabaseCartHelper::addItemToCart($product_id) : CookieCartHelper::addItemToCart($product_id);
-
-        $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
-
-        $this->alert('success', "\"{$product->name}\" has been successfully added to your cart.", [
-            'position' => 'bottom-end',
-            'timer' => 3000,
-            'toast' => true,
-        ]);
-    }
 
     public function mount() {
         $this->price_range = Product::query()->where('is_active', 1)->max('final_price') ?? 0;
@@ -118,7 +88,7 @@ class ProductsPage extends Component
         }
 
         return view('livewire.products-page', [
-            'products' => $productQuery->paginate(10),
+            'products' => $productQuery->paginate(12),
             'brands' => Brand::where('is_active', 1)->get(['id', 'name', 'slug']),
             'categories' => Category::where('is_active', 1)->get(['id', 'name', 'slug']),
             'max_price_of_queried_products' => $this->max_price_of_queried_products,

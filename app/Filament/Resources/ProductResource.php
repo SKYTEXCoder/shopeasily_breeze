@@ -70,11 +70,13 @@ class ProductResource extends Resource
 
                     Section::make('Images')->schema([
                         FileUpload::make('images')
+                            ->label('Upload Product Images')
                             ->multiple()
-                            ->directory('products')
-                            ->maxFiles(10)
                             ->reorderable()
                             ->appendFiles()
+                            ->downloadable()
+                            ->directory('products')
+                            ->maxFiles(10)
                     ])
                 ])->columnSpan(2),
 

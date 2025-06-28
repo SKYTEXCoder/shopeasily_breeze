@@ -34,6 +34,7 @@ class Navbar extends Component
         return view('livewire.partials.navbar', [
             'categories' => $categories,
             'profileImagePath' => $profileImagePath,
+            'isAdmin' => auth()->check() && auth()->user()->is_admin,
         ]);
     }
 }
