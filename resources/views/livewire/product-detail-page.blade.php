@@ -3,7 +3,7 @@
         <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
             <div class="flex flex-wrap -mx-4">
                 <div class="w-full mb-8 md:w-1/2 md:mb-0" x-data="{ mainImage: '{{ url('storage', $product->images[0]) }}' }">
-                    <div class="sticky top-0 z-50 overflow-hidden ">
+                    <div class="sticky top-20 z-10 overflow-hidden">
                         <div class="relative mb-6 lg:mb-10 lg:h-2/4 ">
                             <img x-bind:src="mainImage" alt="" class="object-cover w-full lg:h-full ">
                         </div>

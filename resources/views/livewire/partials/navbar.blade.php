@@ -46,25 +46,39 @@
                                     Email</label>
                                 <button id="dropdown-button" data-dropdown-toggle="dropdown"
                                     class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-                                    type="button">All Categories <svg id="dropdown-arrow" class="w-2.5 h-2.5 ms-2.5"
-                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 10 6">
+                                    type="button">
+                                    <span id="category-button-text">
+                                        @if (request()->get('productCategory') && request()->get('productCategory') != '0')
+                                            @php
+                                                $selectedCategory = $categories->firstWhere(
+                                                    'id',
+                                                    request()->get('productCategory'),
+                                                );
+                                            @endphp
+                                            {{ $selectedCategory ? $selectedCategory->name : 'All Categories' }}
+                                        @else
+                                            All Categories
+                                        @endif
+                                    </span>
+                                    <svg id="dropdown-arrow" class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path id="dropdown-arrow-path" stroke="currentColor" stroke-linecap="round"
                                             stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                    </svg></button>
+                                    </svg>
+                                </button>
                                 <div id="dropdown"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-56 md:w-64 dark:bg-gray-700">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                         aria-labelledby="dropdown-button">
                                         <li wire:key="0">
                                             <button type="button"
-                                                class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                class="inline-flex w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                                 data-js="category-option" value="0">All Categories</button>
                                         </li>
                                         @foreach ($categories as $category)
                                             <li wire:key="{{ $category->id }}">
                                                 <button type="button"
-                                                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    class="inline-flex w-full px-4 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                                                     data-js="category-option"
                                                     value="{{ $category->id }}">{{ $category->name }}</button>
                                             </li>
@@ -74,9 +88,10 @@
                                 <div class="relative w-full md:w-[180px] lg:w-[255px] xl:w-[330px]">
                                     <input type="search" id="search-dropdown" name="searchQuery"
                                         class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                        placeholder="What kind of products are you looking for?" value=""
-                                        required />
-                                    <input type="hidden" id="productCategory" name="productCategory" value="0">
+                                        placeholder="@if (request()->get('productCategory') && request()->get('productCategory') != '0') Search for {{ $categories->firstWhere('id', request()->get('productCategory'))?->name ? strtolower($categories->firstWhere('id', request()->get('productCategory'))->name) : 'products.....' }} @else What kind of products are you looking for? @endif"
+                                        value="{{ request()->get('searchQuery', '') }}" required />
+                                    <input type="hidden" id="productCategory" name="productCategory"
+                                        value="{{ request()->get('productCategory', '0') }}">
                                     <button type="submit"
                                         class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -204,8 +219,7 @@
                                                 My Account Settings
                                             </a>
                                             @if ($isAdmin)
-                                                <a
-                                                    class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                                <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                                                     href="{{ route('filament.admin.pages.dashboard') }}">
                                                     Go To Admin Dashboard
                                                 </a>

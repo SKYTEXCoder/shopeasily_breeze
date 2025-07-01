@@ -39,7 +39,26 @@ class ProductsPage extends Component
     #[Url]
     public $sort = 'latest';
 
+    #[Url]
+    public $search = '';
+
+    #[Url]
+    public $category = '';
+
     public function mount() {
+        // Handle search parameters from GET request
+        if (request()->has('searchQuery')) {
+            $this->search = request()->get('searchQuery');
+        }
+
+        if (request()->has('productCategory') && request()->get('productCategory') != '0') {
+            $this->category = request()->get('productCategory');
+            // Add the search category to selected categories if not already present
+            if (!in_array($this->category, $this->selected_categories)) {
+                $this->selected_categories[] = $this->category;
+            }
+        }
+
         $this->price_range = Product::query()->where('is_active', 1)->max('final_price') ?? 0;
         $this->max_price_of_queried_products = $this->price_range;
     }
@@ -47,6 +66,21 @@ class ProductsPage extends Component
     public function render()
     {
         $productQuery = Product::query()->where('is_active', 1);
+
+        // Apply search query filter
+        if (!empty($this->search)) {
+            $productQuery->where(function($query) {
+                $query->where('name', 'like', '%' . $this->search . '%')
+                      ->orWhere('description', 'like', '%' . $this->search . '%')
+                      ->orWhereHas('category', function($q) {
+                          $q->where('name', 'like', '%' . $this->search . '%');
+                      })
+                      ->orWhereHas('brand', function($q) {
+                          $q->where('name', 'like', '%' . $this->search . '%');
+                      });
+            });
+        }
+
         if (!empty($this->selected_categories)) {
             $productQuery->whereIn('category_id', $this->selected_categories);
         }
