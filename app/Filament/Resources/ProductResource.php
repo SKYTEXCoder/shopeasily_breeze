@@ -22,6 +22,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -126,6 +127,19 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
+
+                ImageColumn::make('images')
+                    ->label('Product Images')
+                    ->size(50)
+                    ->toggleable(isToggledHiddenByDefault: false)
+                    /*->getStateUsing(function ($record) {
+                        $images = $record->images;
+                        return is_array($images) && count($images) > 0 ? $images[0] : null;
+                    })*/,
+
+                TextColumn::make('slug')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
 
                 TextColumn::make('category.name')
                     ->sortable(),

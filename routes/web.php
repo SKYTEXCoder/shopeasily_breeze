@@ -29,10 +29,10 @@ Route::get('/your-profile', ProfileManagementPage::class)
     ->name('profile');
 
 Route::get('/', HomePage::class)->name('index');
-Route::get('/brands', BrandsPage::class);
-Route::get('/categories', CategoriesPage::class);
-Route::get('/products', ProductsPage::class);
-Route::get('/products/{slug}', ProductDetailPage::class);
+Route::get('/brands', BrandsPage::class)->name('brands');
+Route::get('/categories', CategoriesPage::class)->name('categories');
+Route::get('/products', ProductsPage::class)->name('products');
+Route::get('/products/{slug}', ProductDetailPage::class)->name('product.detail');
 Route::get('/cart', CartPage::class)->name('cart');
 Route::get('/contact-sales-team', )->name('contact');
 
@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
         auth()->logout();
         return redirect('/');
     })->name('logout');
-    Route::get('/checkout', CheckoutPage::class);
+    Route::get('/checkout', CheckoutPage::class)->name('checkout');
     Route::get('/my-orders', MyOrdersPage::class)->name('my-orders');
     Route::get('/my-orders/{order_id}', MyOrderDetailPage::class)->name('my-orders.show');
     Route::get('/my-wishlists', MyWishListsPage::class)->name('my-wishlists');
