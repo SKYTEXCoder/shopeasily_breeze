@@ -47,8 +47,7 @@ export function initializeCategorySearchBoxDropdown() {
                 categoryInputField.value = "0";
             } else {
                 searchInputField.placeholder =
-                    "Search for " +
-                    categoryName.toLowerCase();
+                    "Search for " + categoryName.toLowerCase() + " products";
                 categoryInputField.value = categoryValue;
             }
 

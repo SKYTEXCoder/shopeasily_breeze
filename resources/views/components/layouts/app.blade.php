@@ -27,6 +27,10 @@
     <div class="sticky top-0 z-50">
         @livewire('partials.navbar')
     </div>
+
+    <!-- Breadcrumbs Navigation -->
+    @livewire('partials.breadcrumbs')
+
     <main>
         {{ $slot }}
     </main>

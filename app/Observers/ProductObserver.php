@@ -20,11 +20,16 @@ class ProductObserver
      */
     public function updated(Product $product): void
     {
-        $originalImages = $product->getOriginal('images');
-
-        if ($product->isDirty('images') && is_array($originalImages)) {
-            foreach ($originalImages as $image) {
-                Storage::disk('public')->delete($image);
+        if ($product->isDirty('images')) {
+            $originalImages = $product->getOriginal('images') ?? [];
+            $currentImages = $product->images ?? [];
+            $originalImages = is_array($originalImages) ? $originalImages : [];
+            $currentImages = is_array($currentImages) ? $currentImages : [];
+            $removedImages = array_diff($originalImages, $currentImages);
+            foreach ($removedImages as $image) {
+                if (Storage::disk('public')->exists($image)) {
+                    Storage::disk('public')->delete($image);
+                }
             }
         }
     }
@@ -35,7 +40,6 @@ class ProductObserver
     public function deleted(Product $product): void
     {
         $images = $product->images;
-
         if (is_array($images)) {
             foreach ($images as $image) {
                 Storage::disk('public')->delete($image);
