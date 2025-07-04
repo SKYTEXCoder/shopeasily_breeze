@@ -9,10 +9,8 @@
                         </div>
                         <div class="flex-wrap hidden md:flex ">
                             @foreach ($product->images as $image)
-                                <div class="w-1/2 p-2 sm:w-1/4"
-                                    x-on:click="mainImage='{{ url('storage', $image) }}'">
-                                    <img src="{{ url('storage', $image) }}"
-                                        alt="{{ $product->name }}"
+                                <div class="w-1/2 p-2 sm:w-1/4" x-on:click="mainImage='{{ url('storage', $image) }}'">
+                                    <img src="{{ url('storage', $image) }}" alt="{{ $product->name }}"
                                         class="object-cover w-full lg:h-20 cursor-pointer hover:border hover:border-blue-500">
                                 </div>
                             @endforeach
@@ -39,10 +37,12 @@
                         <div class="mb-8 [&>ul]:list-disc [&ul]:ml-4">
                             <h2 class="max-w-xl mb-6 text-2xl font-bold dark:text-gray-400 md:text-4xl">
                                 {{ $product->name }}</h2>
-                            <p class="inline-block mb-6 text-4xl font-bold text-gray-700 dark:text-gray-400 ">
-                                <span>{{ Number::currency($product->final_price, 'IDR', 'id') }}</span>
-                                <span
-                                    class="text-base font-normal text-gray-500 line-through dark:text-gray-400">{{ Number::currency(519999.00, 'IDR', 'id') }}</span>
+                            <p class="inline-block mb-6 text-4xl font-bold dark:text-gray-400 ">
+                                <span class="{{ $product->final_price < $product->original_price ? 'text-green-600 dark:text-green-400' : 'text-gray-700 dark:text-gray-400' }}">{{ Number::currency($product->final_price, 'IDR', 'id') }}</span>
+                                @if ($product->final_price < $product->original_price)
+                                    <span
+                                        class="text-base font-normal text-gray-500 line-through dark:text-gray-400">{{ Number::currency($product->original_price, 'IDR', 'id') }}</span>
+                                @endif
                             </p>
                             <p class="max-w-md text-gray-700 dark:text-gray-400">
                                 {!! nl2br(Str::markdown($product->description)) !!}
@@ -68,7 +68,9 @@
                         <div class="flex flex-wrap items-center gap-4">
                             <button wire:click='addToCart({{ $product->id }})'
                                 class="w-full p-4 bg-blue-500 rounded-md lg:w-2/5 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-700">
-                                <span wire:loading.remove wire:target='addToCart({{ $product->id }})'>Add to Cart</span><span wire:loading wire:target="addToCart({{ $product->id }})">Adding to Cart...</span></button>
+                                <span wire:loading.remove wire:target='addToCart({{ $product->id }})'>Add to
+                                    Cart</span><span wire:loading wire:target="addToCart({{ $product->id }})">Adding to
+                                    Cart...</span></button>
                         </div>
                     </div>
                 </div>
