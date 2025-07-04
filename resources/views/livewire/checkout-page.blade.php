@@ -2,7 +2,7 @@
     <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">
         Check Out Your Shopping Cart
     </h1>
-    <form wire:submit.prevent='placeOrder'>
+    <form wire:submit.prevent='placeOrderRevised'>
         <div class="grid grid-cols-12 gap-4">
             <div class="md:col-span-12 lg:col-span-8 col-span-12">
                 <!-- Card -->
@@ -332,36 +332,47 @@
 
     @script
         <script>
-            $wire.on('redirectToPaymentUrl', (url) => {
-                window.location.href = url
-            })
-        </script>
-    @endscript
 
-    {{-- @section('scripts')
-        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
-        </script>
-        <script type="text/javascript">
-            document.getElementById('pay-button').onclick = function() {
-                // SnapToken acquired from previous step
-                snap.pay('<?= $snapToken ?>', {
-                    // Optional
+            $wire.on('redirectToPaymentUrl', (url) => {
+                window.location.href = url;
+            });
+
+            $wire.on('openSnapPayment', (data) => {
+                var snapToken = data[0].snapToken
+                var orderId = data[0].orderId;
+                if (!snapToken) {
+                    console.error('Error: Snap token is missing');
+                    alert('Payment initialization failed. Please try again or contact support.');
+                    return;
+                }
+                if (typeof snap === 'undefined') {
+                    console.error('Error: Snap.js is not loaded');
+                    alert('Payment system is not ready. Please refresh the page and try again.');
+                    return;
+                }
+                snap.pay(snapToken, {
                     onSuccess: function(result) {
-                        /* You may add your own js here, this is just example */
-                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        // console.log('Payment Success:', result);
+                        // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        window.location.href = '{{ route('success') }}?order_id=' + orderId + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
                     },
-                    // Optional
                     onPending: function(result) {
-                        /* You may add your own js here, this is just example */
-                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        // console.log('Payment Pending:', result);
+                        // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        window.location.href = '{{ route('success') }}?order_id=' + orderId + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
                     },
-                    // Optional
                     onError: function(result) {
-                        /* You may add your own js here, this is just example */
-                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        // console.log('Payment Errorred:', result);
+                        // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                        window.location.href = '{{ route('errorred') }}?order_id=' + orderId + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
+                    },
+                    onClose: function() {
+                        // console.log('Customer closed the popup without finishing payment');
+                        window.location.href = '{{ route('cancelled') }}?order_id=' + orderId;
                     }
                 });
-            };
+            });
         </script>
-    @endsection --}}
+    @endscript
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
 </div>

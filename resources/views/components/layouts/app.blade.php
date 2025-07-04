@@ -27,10 +27,8 @@
     <div class="sticky top-0 z-50">
         @livewire('partials.navbar')
     </div>
-
     <!-- Breadcrumbs Navigation -->
     @livewire('partials.breadcrumbs')
-
     <main>
         {{ $slot }}
     </main>
@@ -38,6 +36,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-livewire-alert::scripts />
     @livewireScripts
+    @yield('scripts')
 </body>
 
 </html>
