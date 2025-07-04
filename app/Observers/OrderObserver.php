@@ -11,7 +11,7 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-        $product_sold_amount = 
+        // $product_sold_amount =
     }
 
     /**

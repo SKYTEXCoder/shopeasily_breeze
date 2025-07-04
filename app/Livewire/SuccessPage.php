@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 
-#[Title('Your Order Confirmation Page - TechGear™')]
+#[Title('Your Order Confirmation Page - TechGear E-Commerce™')]
 class SuccessPage extends Component
 {
     #[Url]
@@ -25,33 +25,58 @@ class SuccessPage extends Component
     ];
     public function mount()
     {
-        $this->latest_order = Order::with('address')
-            ->where('user_id', auth()->user()->id)
-            ->latest()
-            ->first();
+        if (!$this->order_id) {
+            return redirect()->route('my-orders');
+        }
 
-        if ($this->order_id && $this->status_code && $this->transaction_status) {
+        if ($this->status_code && $this->transaction_status) {
             $payment = Payment::where('transaction_id', $this->order_id)->first();
+
+            if (!$payment) {
+                session()->flash('error', 'Payment record not found.');
+                return redirect()->route('my-orders');
+            }
+
             $this->latest_order = $payment->order;
+
+            if (!$this->latest_order) {
+                session()->flash('error', 'Order not found.');
+                return redirect()->route('my-orders');
+            }
+
             if (!in_array($payment->status, ['settlement', 'capture', 'pending'])) {
-                $this->latest_order->payment_status = 'failed';
-                $this->latest_order->status = 'cancelled';
-                $this->latest_order->save();
+                $this->latest_order->update([
+                    'payment_status' => 'failed',
+                    'status' => 'cancelled'
+                ]);
                 return redirect()->route('cancelled');
             } elseif ($payment->status === 'pending') {
-                $this->latest_order->payment_status = 'pending';
-                $this->latest_order->status = 'new';
-                $this->latest_order->save();
+                $this->latest_order->update([
+                    'payment_status' => 'pending',
+                    'status' => 'new'
+                ]);
                 return redirect()->route('my-orders.show', ['order' => $this->latest_order->id]);
             } else {
-                $this->latest_order->payment_status = 'paid';
-                $this->latest_order->status = 'processing';
-                $this->latest_order->save();
+                $this->latest_order->update([
+                    'payment_status' => 'paid',
+                    'status' => 'processing'
+                ]);
             }
         } else {
-            $this->latest_order->payment_status = 'pending';
-            $this->latest_order->status = 'processing';
-            $this->latest_order->save();
+            $this->latest_order = Order::with('address')
+                ->where('user_id', auth()->user()->id)
+                ->where('id', $this->order_id)
+                ->first();
+
+            if (!$this->latest_order) {
+                session()->flash('error', 'Order not found or access denied.');
+                return redirect()->route('my-orders');
+            }
+
+            $this->latest_order->update([
+                'payment_status' => 'pending',
+                'status' => 'processing'
+            ]);
         }
     }
     public function render()

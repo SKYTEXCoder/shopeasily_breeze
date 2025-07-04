@@ -70,6 +70,6 @@ class AdminPanelProvider extends PanelProvider
             ->darkModeBrandLogo(fn () => view('filament.admin.dark-logo'))
             ->homeUrl('/')
             ->favicon(asset(path: 'favicons/techgear/favicon-32x32.png'))
-            ;
+            ->domain(config('app.env') !== 'local' ? 'techgear.dandyaryaa.com' : null);
     }
 }

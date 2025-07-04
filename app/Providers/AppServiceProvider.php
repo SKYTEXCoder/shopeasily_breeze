@@ -13,8 +13,11 @@ use App\Observers\CategoryObserver;
 use App\Observers\OrderObserver;
 use App\Observers\OrderProductObserver;
 use App\Observers\ProductObserver;
-use Event;
+use Filament\Facades\Filament;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,5 +43,23 @@ class AppServiceProvider extends ServiceProvider
             \Illuminate\Auth\Events\Login::class,
             MergeCartFromCookieToDatabaseOnLogin::class,
         );
+        if (config('app.env') !== 'local') {
+            URL::forceScheme('https');
+        }
+        Request::setTrustedProxies(['*'], Request::HEADER_X_FORWARDED_FOR
+            | Request::HEADER_X_FORWARDED_HOST
+            | Request::HEADER_X_FORWARDED_PROTO
+            | Request::HEADER_X_FORWARDED_PORT
+            | Request::HEADER_X_FORWARDED_AWS_ELB
+            | Request::HEADER_X_FORWARDED_FOR
+            | Request::HEADER_X_FORWARDED_PREFIX
+            | Request::HEADER_X_FORWARDED_TRAEFIK
+        );
+
+        if (config('app.env') !== 'local') {
+            Filament::serving(function () {
+                URL::forceRootUrl(config('app.url'));
+            });
+        }
     }
 }

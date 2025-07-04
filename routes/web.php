@@ -1,16 +1,21 @@
 <?php
 
 use App\Http\Controllers\MidtransPaymentController;
+use App\Livewire\AboutUsPage;
 use App\Livewire\BrandsPage;
 use App\Livewire\CancelPage;
 use App\Livewire\CartPage;
 use App\Livewire\CategoriesPage;
 use App\Livewire\CheckoutPage;
+use App\Livewire\ContactSalesTeamPage;
+use App\Livewire\ContactUsPage;
+use App\Livewire\FAQsPage;
 use App\Livewire\HomePage;
 use App\Livewire\MyOrderDetailPage;
 use App\Livewire\MyOrdersPage;
 use App\Livewire\MyWishListDetailPage;
 use App\Livewire\MyWishListsPage;
+use App\Livewire\PaymentErrorredPage;
 use App\Livewire\ProductDetailPage;
 use App\Livewire\ProductsPage;
 use App\Livewire\ProfileManagementPage;
@@ -34,7 +39,10 @@ Route::get('/categories', CategoriesPage::class)->name('categories');
 Route::get('/products', ProductsPage::class)->name('products');
 Route::get('/products/{slug}', ProductDetailPage::class)->name('product.detail');
 Route::get('/cart', CartPage::class)->name('cart');
-Route::get('/contact-sales-team', )->name('contact');
+Route::get('/contact-sales-team', ContactSalesTeamPage::class)->name('contact');
+Route::get('/about-us', AboutUsPage::class)->name('about');
+Route::get('/contact-us', ContactUsPage::class)->name('contact-us');
+Route::get('/faqs', FAQsPage::class)->name('faqs');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -49,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('my-wishlists/{wishlist_id}', MyWishListDetailPage::class)->name('my-wishlists.show');
     Route::get('/payment-success', SuccessPage::class)->name('success');
     Route::get('/payment-cancelled', CancelPage::class)->name('cancelled');
+    Route::get('/payment-errorred', PaymentErrorredPage::class)->name('errorred');
 });
 
 Route::get('/search', ProductsPage::class)->name('search');

@@ -291,7 +291,8 @@
                     </hr>
                 </div>
                 <button type="submit"
-                    class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600">
+                    class="bg-green-500 mt-4 w-full p-3 rounded-lg text-lg text-white hover:bg-green-600"
+                    id="pay-button">
                     <span wire:loading.remove>Place Order</span>
                     <span wire:loading>Processing...</span>
                 </button>
@@ -330,11 +331,37 @@
     </form>
 
     @script
-    <script>
-        $wire.on('redirectToPaymentUrl', (url) => {
-            window.location.href = url
-        })
-    </script>
+        <script>
+            $wire.on('redirectToPaymentUrl', (url) => {
+                window.location.href = url
+            })
+        </script>
     @endscript
 
+    {{-- @section('scripts')
+        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+        </script>
+        <script type="text/javascript">
+            document.getElementById('pay-button').onclick = function() {
+                // SnapToken acquired from previous step
+                snap.pay('<?= $snapToken ?>', {
+                    // Optional
+                    onSuccess: function(result) {
+                        /* You may add your own js here, this is just example */
+                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    },
+                    // Optional
+                    onPending: function(result) {
+                        /* You may add your own js here, this is just example */
+                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    },
+                    // Optional
+                    onError: function(result) {
+                        /* You may add your own js here, this is just example */
+                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    }
+                });
+            };
+        </script>
+    @endsection --}}
 </div>

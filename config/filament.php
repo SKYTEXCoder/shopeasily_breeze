@@ -84,4 +84,9 @@ return [
 
     'livewire_loading_delay' => 'default',
 
+    // Force the correct domain for Filament
+    'domain' => env('FILAMENT_DOMAIN', null),
+    'home_url' => env('APP_URL', '/'),
+    'path' => env('FILAMENT_PATH', 'admin'),
+
 ];
