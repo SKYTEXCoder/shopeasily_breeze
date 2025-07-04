@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Request;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 use Illuminates\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
@@ -36,7 +36,8 @@ class CheckoutPage extends Component
     public $state;
     public $zip_code;
     public $payment_method;
-    public $snap_token;
+    public $snapToken = null;
+    public $midtransPaymentId = null;
 
     public function mount(Request $request)
     {
@@ -45,7 +46,6 @@ class CheckoutPage extends Component
         $selected_cart_items = $request::query('selected_cart_items');
         $this->tax_percentage = config('checkout.tax_percentage');
         $this->shipping_cost = config('checkout.shipping_cost');
-        // If it exists, decode and process the items
         if ($selected_cart_items) {
             $this->selected_cart_items = json_decode($selected_cart_items, true);
             if (!assert('is_array($this->selected_cart_items)')) {
@@ -111,13 +111,12 @@ class CheckoutPage extends Component
                 $payment_id = $responseData['midtrans_payment_id'];
             } else {
                 $responseData = json_decode($response->getContent(), true);
-                session()->flash('error', $responseData['message']);
+                session()->flash('error', $responseData['message'] ?? 'Failed to initialize payment');
                 return;
             }
         } else {
             $redirect_url = route('success');
         }
-
         $order = new Order();
         $order->user_id = Auth::id();
         $order->grand_total = $this->ultimate_grand_total;
@@ -162,6 +161,120 @@ class CheckoutPage extends Component
         DatabaseCartHelper::clearCartItems($this->selected_cart_items);
         Mail::to(request()->user())->send(new OrderPlaced($order));
         $this->dispatch('redirectToPaymentUrl', $redirect_url);
+    }
+
+    /**
+     * Enhanced order placement function that handles both COD and Midtrans payments
+     * Uses Midtrans Snap JS for payment integration with popup instead of redirect
+     */
+    public function placeOrderRevised()
+    {
+        $this->validate([
+            'first_name' => 'required',
+            'last_name' => 'nullable',
+            'phone_number' => 'required',
+            'street_address' => 'required',
+            'address_line_2' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip_code' => 'required',
+            'payment_method' => 'required',
+            'shipping_method' => 'required',
+        ]);
+
+        // Create the order first
+        $order = new Order();
+        $order->user_id = Auth::id();
+        $order->grand_total = $this->ultimate_grand_total;
+        $order->payment_method = $this->payment_method;
+        $order->payment_status = 'pending';
+        $order->status = 'new';
+        $order->currency = 'idr';
+        $order->shipping_amount = $this->shipping_cost;
+        $order->tax_amount = $this->tax_cost;
+        $order->shipping_method = $this->shipping_method;
+        $order->notes = 'An order placed by ' . auth()->user()->name;
+        $order->save();
+
+        $order->products()->createMany($this->cart_items->map(function ($cart_item) use ($order) {
+            return [
+                'product_id' => $cart_item->product_id,
+                'quantity' => $cart_item->quantity,
+                'unit_amount' => $cart_item->unit_amount,
+                'total_amount' => $cart_item->total_amount,
+                'order_id' => $order->id
+            ];
+        })->toArray());
+
+        $address = new Address();
+        $address->order_id = $order->id;
+        $address->first_name = $this->first_name;
+        $address->last_name = $this->last_name;
+        $address->phone = $this->phone_number;
+        $address->street_address = $this->street_address;
+        $address->address_line_2 = $this->address_line_2;
+        $address->city = $this->city;
+        $address->state = $this->state;
+        $address->zip_code = $this->zip_code;
+        $address->save();
+
+        // Handle different payment methods
+        if ($this->payment_method == 'midtrans') {
+            // Get Midtrans snap token
+            $request = Request::create(route('api.payments.midtrans.create'), 'POST', [
+                'checkout_cart_items' => $this->cart_items,
+                'shipping_cost' => $this->shipping_cost,
+                'tax_cost' => $this->tax_cost,
+                'grand_total' => $this->grand_total,
+                'ultimate_grand_total' => $this->ultimate_grand_total,
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email_address' => auth()->user()->email,
+                'phone_number' => $this->phone_number,
+                'street_address' => $this->street_address,
+                'city' => $this->city,
+                'zip_code' => $this->zip_code,
+                'order_id' => $order->id,
+            ]);
+            $response = app()->handle($request);
+            if ($response->isSuccessful()) {
+                $responseData = json_decode($response->getContent(), true);
+                $this->snapToken = $responseData['snap_token'];
+                $this->midtransPaymentId = $responseData['midtrans_payment_id'];
+
+                // Update payment with order ID
+                Payment::where('id', $this->midtransPaymentId)->update(['order_id' => $order->id]);
+
+                // Send order confirmation email
+                Mail::to(request()->user())->send(new OrderPlaced($order));
+
+                // Clear cart items
+                DatabaseCartHelper::clearCartItems($this->selected_cart_items);
+
+                //dd($this->snapToken);
+
+                // Emit event to trigger Snap JS popup
+                $this->dispatch('openSnapPayment', [
+                    'snapToken' => $this->snapToken,
+                    'orderId' => $order->id
+                ]);
+
+                return;
+            } else {
+                // Handle API error
+                $responseData = json_decode($response->getContent(), true);
+                session()->flash('error', $responseData['message'] ?? 'Failed to initialize payment');
+                return;
+            }
+        } else {
+            // Handle COD or other payment methods
+            DatabaseCartHelper::clearCartItems($this->selected_cart_items);
+            Mail::to(request()->user())->send(new OrderPlaced($order));
+
+            // Redirect to success page
+            $redirect_url = route('success', ['order_id' => $order->id]);
+            $this->dispatch('redirectToPaymentUrl', $redirect_url);
+        }
     }
 
     public function calculateUltimateGrandTotal()
