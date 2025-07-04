@@ -226,7 +226,7 @@
                 imgAlt: 'High-performance gaming setup with RGB lighting and multiple monitors displaying games.',
                 title: 'Gaming PC Builds',
                 description: 'Experience ultimate gaming performance with our custom-built gaming rigs featuring the latest RTX graphics cards and high-speed processors.',
-                ctaUrl: '/products?selected_categories[0]=3',
+                ctaUrl: '/products??selected_categories[0]=1&selected_categories[1]=2&selected_categories[2]=3&selected_categories[3]=4&selected_categories[4]=5&selected_categories[5]=6&selected_categories[6]=7&selected_categories[7]=8',
                 ctaText: 'Shop Gaming PCs',
             },
             {
@@ -234,7 +234,7 @@
                 imgAlt: 'Professional workstation setup with multiple displays and high-end components for productivity.',
                 title: 'Professional Workstations',
                 description: 'Power through demanding tasks with workstation-grade components designed for content creation, engineering, and professional applications.',
-                ctaUrl: '/products?selected_categories[0]=5',
+                ctaUrl: '/products?selected_categories[0]=1&selected_categories[1]=3&selected_categories[2]=2&selected_categories[3]=9',
                 ctaText: 'Build Workstation',
             },
             {
@@ -250,7 +250,7 @@
                 imgAlt: 'Streaming setup with professional lighting, high-end camera, and powerful gaming PC for content creation.',
                 title: 'Streaming & Content Creation',
                 description: 'Build the perfect streaming setup with powerful CPUs, capture cards, and streaming accessories to create professional-quality content.',
-                ctaUrl: '/products?selected_categories[0]=7',
+                ctaUrl: '/products?selected_categories[0]=9&selected_categories[1]=10',
                 ctaText: 'Shop Streaming Gear',
             },
             {
@@ -258,7 +258,7 @@
                 imgAlt: 'Budget-friendly PC build with cost-effective components that deliver excellent performance for everyday computing.',
                 title: 'Budget Gaming Builds',
                 description: 'Get incredible gaming performance without breaking the bank. Carefully selected components that deliver maximum value for your money.',
-                ctaUrl: '/products?price_max=1000',
+                ctaUrl: '/products?selected_categories[0]=1&selected_categories[1]=2&selected_categories[2]=3&selected_categories[3]=4&selected_categories[4]=5&selected_categories[5]=6&selected_categories[6]=7&selected_categories[7]=8&price_range=10000000&comingFromCTAButton=true',
                 ctaText: 'Budget Builds',
             },
         ],

@@ -17,49 +17,42 @@ class ProductsPage extends Component
 
     #[Url]
     public $selected_categories = [];
-
     #[Url]
     public $selected_brands = [];
-
     #[Url]
     public $featured;
-
     #[Url]
     public $on_sale;
-
     #[Url]
     public $in_stock;
-
     #[Url]
     public $price_range = 0;
-
     #[Url]
     public $max_price_of_queried_products = 0;
-
     #[Url]
     public $sort = 'latest';
-
     #[Url]
     public $search = '';
-
     #[Url]
     public $category = '';
+    #[Url]
+    public $comingFromCTAButton = false;
 
     public function mount() {
-        // Handle search parameters from GET request
         if (request()->has('searchQuery')) {
             $this->search = request()->get('searchQuery');
         }
-
         if (request()->has('productCategory') && request()->get('productCategory') != '0') {
             $this->category = request()->get('productCategory');
-            // Add the search category to selected categories if not already present
             if (!in_array($this->category, $this->selected_categories)) {
                 $this->selected_categories[] = $this->category;
             }
         }
-
-        $this->price_range = Product::query()->where('is_active', 1)->max('final_price') ?? 0;
+        if ($this->price_range > 0 && $this->comingFromCTAButton) {
+            $this->price_range = (int) $this->price_range;
+        } else {
+            $this->price_range = Product::query()->where('is_active', 1)->max('final_price') ?? 0;
+        }
         $this->max_price_of_queried_products = $this->price_range;
     }
 
