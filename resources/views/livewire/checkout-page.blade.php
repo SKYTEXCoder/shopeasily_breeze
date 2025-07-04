@@ -354,17 +354,17 @@
                     onSuccess: function(result) {
                         // console.log('Payment Success:', result);
                         // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                        window.location.href = '{{ route('success') }}?order_id=' + orderId + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
+                        window.location.href = '{{ route('success') }}?order_id=' + result.order_id + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
                     },
                     onPending: function(result) {
                         // console.log('Payment Pending:', result);
                         // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                        window.location.href = '{{ route('success') }}?order_id=' + orderId + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
+                        window.location.href = '{{ route('success') }}?order_id=' + result.order_id + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
                     },
                     onError: function(result) {
                         // console.log('Payment Errorred:', result);
                         // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                        window.location.href = '{{ route('errorred') }}?order_id=' + orderId + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
+                        window.location.href = '{{ route('errorred') }}?order_id=' + result.order_id + '&status_code=' + result.status_code + '&transaction_status=' + result.transaction_status;
                     },
                     onClose: function() {
                         // console.log('Customer closed the popup without finishing payment');
