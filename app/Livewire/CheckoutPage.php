@@ -8,13 +8,13 @@ use App\Models\Address;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Request;
 use Mail;
-use Redirect;
-use Str;
+use Illuminates\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 
 #[Title('TechGear™ - Check Out Your Shopping Cart')]
 class CheckoutPage extends Component
@@ -36,6 +36,7 @@ class CheckoutPage extends Component
     public $state;
     public $zip_code;
     public $payment_method;
+    public $snap_token;
 
     public function mount(Request $request)
     {
@@ -69,7 +70,8 @@ class CheckoutPage extends Component
         }
     }
 
-    public function placeOrder() {
+    public function placeOrder()
+    {
         $this->validate([
             'first_name' => 'required',
             'last_name' => 'nullable',
@@ -107,14 +109,12 @@ class CheckoutPage extends Component
                 $responseData = json_decode($response->getContent(), true);
                 $redirect_url = $responseData['redirect_url'];
                 $payment_id = $responseData['midtrans_payment_id'];
-            }
-            else {
+            } else {
                 $responseData = json_decode($response->getContent(), true);
                 session()->flash('error', $responseData['message']);
                 return;
             }
-        }
-        else {
+        } else {
             $redirect_url = route('success');
         }
 
@@ -141,6 +141,10 @@ class CheckoutPage extends Component
             ];
         })->toArray());
 
+        if ($this->payment_method !== 'midtrans') {
+            $redirect_url = route('success', ['order_id' => $order->id]);
+        }
+
         $address = new Address();
         $address->order_id = $order->id;
         $address->first_name = $this->first_name;
@@ -160,7 +164,8 @@ class CheckoutPage extends Component
         $this->dispatch('redirectToPaymentUrl', $redirect_url);
     }
 
-    public function calculateUltimateGrandTotal() {
+    public function calculateUltimateGrandTotal()
+    {
         return $this->grand_total + $this->tax_cost + $this->shipping_cost;
     }
 

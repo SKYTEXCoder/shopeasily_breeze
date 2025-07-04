@@ -18,6 +18,7 @@
         "livewire/livewire": "3.5.12",
         "livewire/volt": "^1.0",
         "midtrans/midtrans-php": "^2.6",
+        "monicahq/laravel-cloudflare": "^3.8",
         "orangehill/iseed": "^3.0",
         "spatie/laravel-medialibrary": "^11.13"
     },

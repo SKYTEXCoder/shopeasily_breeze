@@ -106,7 +106,7 @@ class MidtransPaymentController extends Controller
         $payment->save();
         return response()->json([
             'success' => true,
-            'message' => 'Successfully obtained redirect_url and snap_token from Midtrans API',
+            'message' => 'Successfully obtained redirect_url and snap_token from Midtrans Payment Gateway API',
             'redirect_url' => $response["redirect_url"],
             'snap_token' => $response["token"],
             'midtrans_payment_id' => $payment->id,

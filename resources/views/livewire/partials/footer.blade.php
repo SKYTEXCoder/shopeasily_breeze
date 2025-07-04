@@ -17,11 +17,11 @@
 
                 <div class="mt-3 grid space-y-3">
                     <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="/categories">Categories</a></p>
+                            href="{{ route('categories') }}">Categories</a></p>
                     <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="/products">All Products</a></p>
+                            href="{{ route('products') }}">All Products</a></p>
                     <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="/products">Featured Products</a></p>
+                            href="{{ route('products') . '?featured=true' }}">Featured Products</a></p>
                 </div>
             </div>
             <!-- End Col -->
@@ -31,11 +31,13 @@
 
                 <div class="mt-3 grid space-y-3">
                     <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="#">About Us</a></p>
+                            href="{{ route('about') }}">About Us</a></p>
                     <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="#">Frequently Asked Questions (FAQs)</a></p>
+                            href="{{ route('faqs') }}">Frequently Asked Questions (FAQs)</a></p>
                     <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="#">Contact Us</a></p>
+                            href="{{ route('contact-us') }}">Contact Us</a></p>
+                    <p><a class="inline-flex gap-x-2 text-gray-400 hover:text-gray-200 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                            href="{{ route('contact') }}">Contact Sales Team</a></p>
                 </div>
             </div>
             <!-- End Col -->
