@@ -1,0 +1,46 @@
+# Dependencies
+/vendor
+/node_modules
+
+# Environment
+.env
+.env.backup
+.env.production
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Laravel
+/storage/*.key
+/public/hot
+/public/storage
+
+# Testing
+.phpunit.result.cache
+
+# Build artifacts
+/public/build
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker (don't copy these into the image if using COPY .)
+Dockerfile
+docker-compose.yml
+.dockerignore
