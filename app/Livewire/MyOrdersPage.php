@@ -2,7 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Order;
+use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Title('My Orders Page - TechGear™')]
 class MyOrdersPage extends Component
